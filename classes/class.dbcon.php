@@ -20,7 +20,7 @@
 						{
                 die('An error occured while trying to connect to the database.');
             }
-            return $connection;
+            return $this->connection;
         }
     }
 
@@ -32,6 +32,7 @@
     function fetch_from_db($query) {
         //$query = mysqli_query($connection->$connection, 'QUERY');
         $result = $this->connection->query($query);
+        $dataSet = Array();
 				
         if (!$result) {
           printf("Query failed: %s\n", $mysqli->error);

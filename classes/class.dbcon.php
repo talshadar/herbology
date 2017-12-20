@@ -35,7 +35,7 @@
         $dataSet = Array();
 				
         if (!$result) {
-          printf("Query failed: %s\n", $connection->error);
+          print("Query failed: %s\n");
           exit;
         }      
         while($row = $result->fetch_row()) {

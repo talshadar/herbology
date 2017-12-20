@@ -35,7 +35,7 @@
         $dataSet = Array();
 				
         if (!$result) {
-          printf("Query failed: %s\n", $mysqli->error);
+          printf("Query failed: %s\n", $connection->error);
           exit;
         }      
         while($row = $result->fetch_row()) {

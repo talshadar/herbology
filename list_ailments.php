@@ -1,4 +1,4 @@
-<?php
+<?PHP
 ##########################################################################
 #  Herbology
 #  herb Page
@@ -6,6 +6,8 @@
 #  Matthew Bryan
 #  Oct 29, 2017
 ##########################################################################
+// Report all PHP errors (see changelog)
+error_reporting(E_ALL);
 
 session_start();
 /*
@@ -38,7 +40,7 @@ include ('inc/header.inc.php');
   </div><!-- /.modal-dialog -->
 </div>
 
-<?
+<?PHP 
 
 
 if (!$_GET && !$_POST)
@@ -56,15 +58,15 @@ else
 <table border="0" cellpadding="0" cellspacing="0" width = "80%">
 	<tr valign="middle">
 		<td align="left"><br>
-				<? echo $title; ?>
+				<?PHP  echo $title; ?>
 		</td>
 	</tr>
 	<tr>
-	  <td> <? echo $list; ?> </td>
+	  <td> <?PHP  echo $list; ?> </td>
 	</tr>
 </table>
 
-<?
+<?PHP 
 
 
 # now include the footer
@@ -146,7 +148,7 @@ function listailment($ailmentID)
 var herb = {};
 var herbDef = {};
 
-<?
+<?PHP 
 
 		$herbList = $ailments->get_ailment_herbs($ailmentID);
 		if (!is_null($herbList))
@@ -193,7 +195,7 @@ window.onclick = function(event) {
 };
 
 </script>
-<?
+<?PHP 
       	
 	}
 

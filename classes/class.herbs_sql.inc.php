@@ -7,6 +7,8 @@
 #  Matthew Bryan
 #  Oct 29, 2017
 ##########################################################################
+// Report all PHP errors (see changelog)
+error_reporting(E_ALL);
 
   require_once('class.dbcon.php');
 	class herbs_sql
@@ -15,7 +17,7 @@
 
 		function herbs_sql()
 		{
-			$this->db = new DBCon('localhost', 'bruttle_herbadmn', 'passwd', 'bruttle_herbology');
+			$this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
 //			$this->db->connect;
 		}
 		
@@ -78,7 +80,7 @@
       $sql .= "FROM herbs "; 
 			$sql .= " order by herb";
 			
-      //echo "<br>SQL:" . $sql;
+      echo "<br>SQL:" . $sql;
 			
 			$result = $this->db->fetch_from_db($sql);
 			return $result;			

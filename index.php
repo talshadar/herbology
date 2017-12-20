@@ -6,6 +6,8 @@
 #  Matthew Bryan
 #  Oct 29, 2017
 ##########################################################################
+// Report all PHP errors (see changelog)
+error_reporting(E_ALL);
 
 session_start();
 /*
@@ -33,11 +35,11 @@ include ('inc/header.inc.php');
 <table border="0" cellpadding="0" cellspacing="0" >
 	<tr valign="middle">
 		<td align="left"><br>
-				<? echo $title; ?>
+				<?PHP echo $title; ?>
 		</td>
 	</tr>
 	<tr>
-	  <td> <? echo $list; ?> </td>
+	  <td> <?PHP echo $list; ?> </td>
 	</tr>
 </table>
 

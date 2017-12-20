@@ -268,7 +268,7 @@ var energDef = {};
 var ailment = {};
 var ailmentDef = {};
 
-<?
+<?PHP
 
 		$propertyList = $properties->get_herb_properties($herbID);
 		if (!is_null($propertyList))
@@ -379,7 +379,7 @@ $(document).on("click", ".ailmentLink", function() {
 });
 
 </script>
-<?
+<?PHP
       	
 
 

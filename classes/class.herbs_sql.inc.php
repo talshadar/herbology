@@ -90,7 +90,7 @@ require_once('class.dbcon.php');
             $sql .= " order by herb";
             //$sql .= " limit 15";
 
-            echo "<br>SQL:" . $sql;
+            //echo "<br>SQL:" . $sql;
 
             $result = $this->db->fetch_from_db($sql);
             return $result;			

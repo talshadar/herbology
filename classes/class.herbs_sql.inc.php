@@ -87,7 +87,8 @@ require_once('class.dbcon.php');
 
             $sql = "SELECT herbs.* ";
             $sql .= "FROM herbs "; 
-            $sql .= " order by herb";
+            //$sql .= " order by herb";
+            $sql .= " limit 15";
 
             echo "<br>SQL:" . $sql;
 

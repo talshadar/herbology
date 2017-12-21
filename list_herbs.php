@@ -87,81 +87,81 @@ function listHerbs()
     {
   	foreach ($herbList as $count => $data)
   	{
-  			$herbInfo[$count]['herbID'] = $data[0];
-  			$herbInfo[$count]['herb'] = $data[1];
-  			$herbInfo[$count]['warning'] = $data[5];
-				$propInfo ="";
-				
-				$propertyList = $properties->get_herb_properties($data[0]);
-				if (!is_null($propertyList))
-				{
-        	
-        	//echo "Properties:<pre>";
-         	//print_r($propertyList);
-         	//echo "</pre>";
-					
-					foreach ($propertyList as $propCount => $propData)
-					{
-					    $propInfo .= $propData[0];
-							if ($propCount < count($propertyList)-1)
-							{
-							  $propInfo .= ", ";
-							}
-					}
-        	
-					//echo $propInfo . "<br>";
-				}
-				
-				$herbInfo[$count]['properties'] = $propInfo;
+            $herbInfo[$count]['herbID'] = $data[0];
+            $herbInfo[$count]['herb'] = $data[1];
+            $herbInfo[$count]['warning'] = $data[5];
+            $propInfo ="";
+/*
+            $propertyList = $properties->get_herb_properties($data[0]);
+            if (!is_null($propertyList))
+            {
 
-				$energInfo ="";
-				
-				$energeticList = $energetics->get_herb_energetics($data[0]);
-				if (!is_null($energeticList))
-				{
-        	
-        	//echo "Properties:<pre>";
-         	//print_r($propertyList);
-         	//echo "</pre>";
-					
-					foreach ($energeticList as $energCount => $energData)
-					{
-					    $energInfo .= $energData[0];
-							if ($energCount < count($energeticList)-1)
-							{
-							  $energInfo .= ", ";
-							}
-					}
-        	
-					//echo $energInfo . "<br>";
-				}
-				
-				$herbInfo[$count]['energetics'] = $energInfo;
+            //echo "Properties:<pre>";
+            //print_r($propertyList);
+            //echo "</pre>";
 
-				$ailmentInfo ="";
-				$ailmentList = $ailments->get_herb_ailments($data[0]);
-				if (!is_null($ailmentList))
-				{
-        	
-        	//echo "Properties:<pre>";
-         	//print_r($propertyList);
-         	//echo "</pre>";
-					
-					foreach ($ailmentList as $ailmentCount => $ailmentData)
-					{
-					    $ailmentInfo .= $ailmentData[0];
-							if ($ailmentCount < count($ailmentList)-1)
-							{
-							  $ailmentInfo .= ", ";
-							}
-					}
-					//echo $energInfo . "<br>";
-				}
-				
-				$herbInfo[$count]['ailments'] = $ailmentInfo;
+                foreach ($propertyList as $propCount => $propData)
+                {
+                    $propInfo .= $propData[0];
+                    if ($propCount < count($propertyList)-1)
+                    {
+                      $propInfo .= ", ";
+                    }
+                }
 
+                    //echo $propInfo . "<br>";
+            }
+
+            $herbInfo[$count]['properties'] = $propInfo;
+
+            $energInfo ="";
+
+            $energeticList = $energetics->get_herb_energetics($data[0]);
+            if (!is_null($energeticList))
+            {
+
+                //echo "Properties:<pre>";
+                //print_r($propertyList);
+                //echo "</pre>";
+
+                foreach ($energeticList as $energCount => $energData)
+                {
+                    $energInfo .= $energData[0];
+                    if ($energCount < count($energeticList)-1)
+                    {
+                      $energInfo .= ", ";
+                    }
+                }
+
+                //echo $energInfo . "<br>";
+            }
+
+            $herbInfo[$count]['energetics'] = $energInfo;
+
+            $ailmentInfo ="";
+            $ailmentList = $ailments->get_herb_ailments($data[0]);
+            if (!is_null($ailmentList))
+            {
+
+                //echo "Properties:<pre>";
+                //print_r($propertyList);
+                //echo "</pre>";
+
+                foreach ($ailmentList as $ailmentCount => $ailmentData)
+                {
+                    $ailmentInfo .= $ailmentData[0];
+                    if ($ailmentCount < count($ailmentList)-1)
+                    {
+                      $ailmentInfo .= ", ";
+                    }
+                }
+                //echo $energInfo . "<br>";
+            }
+
+            $herbInfo[$count]['ailments'] = $ailmentInfo;
+*/
   	}	
-	}
+    }
 
   /*
  	echo "Sorted<pre>";
@@ -171,39 +171,39 @@ function listHerbs()
 		
 	$rowStyle = 'rowoff';
 	//now start looping through the users info
-  if (!is_null($herbInfo))
-  {
+    if (!is_null($herbInfo))
+    {
   	foreach ($herbInfo as $id => $data)
   	{
-  		$rowStyle == 'rowon' ? $rowStyle = 'rowoff' : $rowStyle = 'rowon';
-	    $list .= '<p class="' . $rowStyle . '">';
-			$list .= '<a href="list_herbs.php?herb=' . $data['herbID'] . '" target="_blank">';
-   		$list .= $data['herb']. "&nbsp;";
-			$list .= '</a><br/>';
-			if ($data['latin_name'] != "")
-			{
-     		 $list .= $data['latin_name']. "<br/>";
-			}
-			if ($data['other_names'] != "")
-			{
-   		   $list .= $data['other_names']. "<br/>";
-			}
-			if ($data['warning'] != "")
-			{
-			   $list .= "<strong>WARNING: " . $data['warning']. "</strong><br/>";
-			}			
-			if ($data['properties'] != "")
-			{
-   		   $list .= "Properties: " . $data['properties'] . "<br/>";
-			}
-			if ($data['energetics'] != "")
-			{
-   		   $list .= "Energetics: " . $data['energetics'] . "<br/>";
-			}
-			if ($data['ailments'] != "")
-			{
-   		   $list .= "<strong>Ailments:</strong> " . $data['ailments'] . "<br/>";
-			}
+            $rowStyle == 'rowon' ? $rowStyle = 'rowoff' : $rowStyle = 'rowon';
+            $list .= '<p class="' . $rowStyle . '">';
+            $list .= '<a href="list_herbs.php?herb=' . $data['herbID'] . '" target="_blank">';
+            $list .= $data['herb']. "&nbsp;";
+            $list .= '</a><br/>';
+            if ($data['latin_name'] != "")
+            {
+             $list .= $data['latin_name']. "<br/>";
+            }
+            if ($data['other_names'] != "")
+            {
+               $list .= $data['other_names']. "<br/>";
+            }
+            if ($data['warning'] != "")
+            {
+               $list .= "<strong>WARNING: " . $data['warning']. "</strong><br/>";
+            }			
+            if ($data['properties'] != "")
+            {
+               $list .= "Properties: " . $data['properties'] . "<br/>";
+            }
+            if ($data['energetics'] != "")
+            {
+               $list .= "Energetics: " . $data['energetics'] . "<br/>";
+            }
+            if ($data['ailments'] != "")
+            {
+               $list .= "<strong>Ailments:</strong> " . $data['ailments'] . "<br/>";
+            }
 
 	    $list .= "</p>";
   	}

@@ -6,6 +6,9 @@
 #  Matthew Bryan
 #  Oct 29, 2017
 ##########################################################################
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+ini_set('memory_limit', '-1');
 
   class DBCon {
     private $connection; // this is where the object will store the connection for other methods to access it

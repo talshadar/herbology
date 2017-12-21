@@ -7,7 +7,7 @@
 #  Matthew Bryan
 #  Oct 29, 2017
 ##########################################################################
-ini_set('memory_limit', '1024M');
+ini_set('memory_limit', '200M');
 require_once('class.properties_sql.inc.php');
 
 class properties

@@ -12,24 +12,31 @@
   require_once('class.dbcon.php');
 	class properties_sql
 	{
-		var $db;
 
-		function properties_sql()
-		{
-			$this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
-//			$this->db->connect;
-		}
+             public function __construct()
+             {
+                 $this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
+             }
+            
+            var $db;
+
+            function properties_sql()
+            {
+                self::__construct();
+                //$this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
+                //$this->db->connect;
+            }
 		
-		function get_properties()
-		{
+            function get_properties()
+            {
 			
-			$sql = "select * from properties ";
-			$sql .= " order by term ";
-      //echo "<br>SQL:" . $sql;
-			
-			$result = $this->db->fetch_from_db($sql);
-			return $result;			
-		}
+                $sql = "select * from properties ";
+                $sql .= " order by term ";
+                //echo "<br>SQL:" . $sql;
+
+                $result = $this->db->fetch_from_db($sql);
+                return $result;			
+            }
 		
 		function get_herb_properties($herbID)
 		{

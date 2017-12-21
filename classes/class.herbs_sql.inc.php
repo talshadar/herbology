@@ -12,12 +12,19 @@ error_reporting(E_ALL);
 
 require_once('class.dbcon.php');
     class herbs_sql
-    {            
+    {
+        
         var $db;
+
+        public function __construct()
+        {
+            $this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
+        }
 
         function herbs_sql()
         {
-            $this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
+            self::__construct();
+            //$this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
 //          $this->db->connect;
         }
 		

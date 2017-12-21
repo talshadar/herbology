@@ -19,11 +19,11 @@ if (!$_SESSION['conoco']['account']['userID'])
 }
 */
 include_once('classes/class.herbs.inc.php');
-include_once('classes/class.properties.inc.php');
-include_once('classes/class.energetics.inc.php');
-include_once('classes/class.ailments.inc.php');
-include_once('classes/class.parts.inc.php');
-include_once('classes/class.body.inc.php');
+//include_once('classes/class.properties.inc.php');
+//include_once('classes/class.energetics.inc.php');
+//include_once('classes/class.ailments.inc.php');
+//include_once('classes/class.parts.inc.php');
+//include_once('classes/class.body.inc.php');
 
 include ('inc/header.inc.php');
 
@@ -41,14 +41,14 @@ else
 ?>
 
 <table border="0" cellpadding="0" cellspacing="0" width = "80%">
-	<tr valign="middle">
-		<td align="left"><br>
-				<?PHP echo $title; ?>
-		</td>
-	</tr>
-	<tr>
-	  <td> <?PHP echo $list; ?> </td>
-	</tr>
+    <tr valign="middle">
+        <td align="left"><br>
+            <?PHP echo $title; ?>
+        </td>
+    </tr>
+    <tr>
+        <td> <?PHP echo $list; ?> </td>
+    </tr>
 </table>
 
 <?PHP

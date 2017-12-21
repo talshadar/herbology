@@ -167,11 +167,12 @@ function listHerbs()
   	}	
     }
 
-  
+    /*
     echo "Sorted<pre>";
     print_r($herbInfo);
     echo "</pre>";
-
+    */
+    
     $rowStyle = 'rowoff';
     
     

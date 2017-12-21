@@ -60,12 +60,12 @@ else
   ?>
   
   <table border="0" cellpadding="0" cellspacing="0" width = "95%">
-  	<?
+  	<?PHP
   		if ($loggedout)
   		{
   			?>
   				<tr><td><h2>LOGGED OUT</h2></td></tr>
-  			<?
+  			<?PHP
   		}
   	?>
   	<tr valign="middle">
@@ -82,11 +82,8 @@ else
   	</tr>
   </table>
   
-  <?
+  <?PHP
 }
-
-
-
 
 
 # now include the footer

@@ -34,8 +34,8 @@
         $result = $this->connection->query($query);
         $dataSet = Array();
 				
-        if (!$result) {
-          printf("Query failed: %s\n", $this->connection->error);
+        if ($this->connection->error) {
+          print("Query failed: %s\n" . $this->connection->error);
           exit;
         }      
         while($row = $result->fetch_row()) {

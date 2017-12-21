@@ -83,8 +83,8 @@ function listHerbs()
  	echo "</pre>";
 	*/
 	
-  if (!is_null($herbList))
-	{
+    if (!is_null($herbList))
+    {
   	foreach ($herbList as $count => $data)
   	{
   			$herbInfo[$count]['herbID'] = $data[0];

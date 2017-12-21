@@ -43,7 +43,7 @@ preparations
 
 		function formulas_sql()
 		{
-			$this->db = new DBCon('localhost', 'bruttle_herbadmn', 'passwd', 'bruttle_herbology');
+			$this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
 //			$this->db->connect;
 		}
 		

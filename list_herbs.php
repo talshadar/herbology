@@ -66,7 +66,7 @@ function listHerbs()
     $herbList = $herbs->get_herbs();
     //$properties = new properties();
     //$energetics = new energetics();
-    $ailments = new ailments();
+    //$ailments = new ailments();
 
 
     /*

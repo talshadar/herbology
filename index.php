@@ -44,7 +44,7 @@ include ('inc/header.inc.php');
 	</tr>
 </table>
 
-<?
+<?php
 
 
 # now include the footer

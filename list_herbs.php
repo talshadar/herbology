@@ -27,6 +27,8 @@ include_once('classes/class.herbs.inc.php');
 
 include ('inc/header.inc.php');
 
+$title="";
+$list="";
 
 if (!$_GET && !$_POST)
 {

@@ -23,7 +23,8 @@ include_once('classes/class.properties.inc.php');
 include_once('classes/class.energetics.inc.php');
 include_once('classes/class.parts.inc.php');
 include_once('classes/class.body.inc.php');
-
+$title="";
+$list="";
 if (!$_GET && !$_POST)
 {
   $list = listChoices();
@@ -34,14 +35,14 @@ include ('inc/header.inc.php');
 ?>
 
 <table border="0" cellpadding="0" cellspacing="0" >
-	<tr valign="middle">
-		<td align="left"><br>
-				<?PHP echo $title; ?>
-		</td>
-	</tr>
-	<tr>
-	  <td> <?PHP echo $list; ?> </td>
-	</tr>
+    <tr valign="middle">
+        <td align="left"><br>
+                        <?PHP echo $title; ?>
+        </td>
+    </tr>
+    <tr>
+        <td> <?PHP echo $list; ?> </td>
+    </tr>
 </table>
 
 <?php
@@ -55,10 +56,10 @@ include ('inc/footer.inc.php');
 
 function listChoices()
 {
-			$list = '<p><a href="list_herbs.php" >Herb List</a></p>';
-			$list .= '<p><a href="list_formulas.php" >Formula List</a></p>';
-			$list .= '<p><a href="list_ailments.php" >Ailment List</a></p>';
-			return $list;
+    $list = '<p><a href="list_herbs.php" >Herb List</a></p>';
+    $list .= '<p><a href="list_formulas.php" >Formula List</a></p>';
+    $list .= '<p><a href="list_ailments.php" >Ailment List</a></p>';
+    return $list;
 }
 
 

@@ -64,9 +64,9 @@ function listHerbs()
 {
     $herbs = new herbs;
     $herbList = $herbs->get_herbs();
-    //$properties = new properties();
-    //$energetics = new energetics();
-    //$ailments = new ailments();
+    $properties = new properties();
+    $energetics = new energetics();
+    $ailments = new ailments();
 
 
     /*
@@ -92,7 +92,7 @@ function listHerbs()
             $herbInfo[$count]['herb'] = $data[1];
             $herbInfo[$count]['warning'] = $data[5];
             $propInfo ="";
-/*
+
             $propertyList = $properties->get_herb_properties($data[0]);
             if (!is_null($propertyList))
             {
@@ -114,7 +114,7 @@ function listHerbs()
             }
 
             $herbInfo[$count]['properties'] = $propInfo;
-
+/*
             $energInfo ="";
 
             $energeticList = $energetics->get_herb_energetics($data[0]);

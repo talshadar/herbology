@@ -19,11 +19,11 @@ if (!$_SESSION['conoco']['account']['userID'])
 }
 */
 include_once('classes/class.herbs.inc.php');
-//include_once('classes/class.properties.inc.php');
-//include_once('classes/class.energetics.inc.php');
-//include_once('classes/class.ailments.inc.php');
-//include_once('classes/class.parts.inc.php');
-//include_once('classes/class.body.inc.php');
+include_once('classes/class.properties.inc.php');
+include_once('classes/class.energetics.inc.php');
+include_once('classes/class.ailments.inc.php');
+include_once('classes/class.parts.inc.php');
+include_once('classes/class.body.inc.php');
 
 include ('inc/header.inc.php');
 
@@ -62,26 +62,27 @@ include ('inc/footer.inc.php');
 
 function listHerbs()
 {
-	$herbs = new herbs;
-	$herbList = $herbs->get_herbs();
-	//$properties = new properties();
-	//$energetics = new energetics();
-	//$ailments = new ailments();
+    $herbs = new herbs;
+    $herbList = $herbs->get_herbs();
+    //$properties = new properties();
+    //$energetics = new energetics();
+    //$ailments = new ailments();
 
-	
-	/*
-	foreach ($herbList as $count => $array)
-	{
-            $newArray[$count] = set_array_names($array,'docDwg');
-	}
-	unset($docdwgList);
-	$docdwgList = $newArray;
-	*/
-	
-	echo "Herb List 1<pre>";
- 	print_r($herbList);
- 	echo "</pre>";
-	
+
+    /*
+    foreach ($herbList as $count => $array)
+    {
+        $newArray[$count] = set_array_names($array,'docDwg');
+    }
+    unset($docdwgList);
+    $docdwgList = $newArray;
+    */
+
+    /*
+    echo "Herb List 1<pre>";
+    print_r($herbList);
+    echo "</pre>";
+    */
 	
     if (!is_null($herbList))
     {
@@ -167,7 +168,6 @@ function listHerbs()
     echo "Sorted<pre>";
     print_r($herbInfo);
     echo "</pre>";
-    	
 
     $rowStyle = 'rowoff';
     

@@ -171,7 +171,7 @@ function listHerbs()
 
     $rowStyle = 'rowoff';
     
-    /*
+    
     
     //now start looping through the users info
     if (!is_null($herbInfo))
@@ -211,7 +211,7 @@ function listHerbs()
 	    $list .= "</p>";
   	}
     }
-    */
+    
 	
 	return $list;
 	

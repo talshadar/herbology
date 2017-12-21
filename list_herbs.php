@@ -72,16 +72,16 @@ function listHerbs()
 	/*
 	foreach ($herbList as $count => $array)
 	{
-		$newArray[$count] = set_array_names($array,'docDwg');
+            $newArray[$count] = set_array_names($array,'docDwg');
 	}
 	unset($docdwgList);
 	$docdwgList = $newArray;
 	*/
-	/*
+	
 	echo "Herb List 1<pre>";
  	print_r($herbList);
  	echo "</pre>";
-	*/
+	
 	
     if (!is_null($herbList))
     {
@@ -163,14 +163,17 @@ function listHerbs()
   	}	
     }
 
-  /*
- 	echo "Sorted<pre>";
- 	print_r($herbInfo);
- 	echo "</pre>";
-	*/	
-		
-	$rowStyle = 'rowoff';
-	//now start looping through the users info
+  
+    echo "Sorted<pre>";
+    print_r($herbInfo);
+    echo "</pre>";
+    	
+
+    $rowStyle = 'rowoff';
+    
+    /*
+    
+    //now start looping through the users info
     if (!is_null($herbInfo))
     {
   	foreach ($herbInfo as $id => $data)
@@ -207,8 +210,8 @@ function listHerbs()
 
 	    $list .= "</p>";
   	}
-  }
-	
+    }
+    */
 	
 	return $list;
 	

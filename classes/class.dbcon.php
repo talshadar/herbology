@@ -12,12 +12,12 @@
 
     public function __construct($host, $username, $password, $database)
     {
-        $this->connection = mysqli_connect($host, $username, $password);
+        $this->connection = mysqli_connect($host, $username, $password, $database);
         if ($host) 
-				{
+	{
             $this->connection->select_db($database); 
             if (!$this->connection) 
-						{
+            {
                 die('An error occured while trying to connect to the database.');
             }
             return $this->connection;

@@ -64,9 +64,9 @@ function listHerbs()
 {
 	$herbs = new herbs;
 	$herbList = $herbs->get_herbs();
-	$properties = new properties();
-	$energetics = new energetics();
-	$ailments = new ailments();
+	//$properties = new properties();
+	//$energetics = new energetics();
+	//$ailments = new ailments();
 
 	
 	/*

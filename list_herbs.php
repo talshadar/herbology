@@ -67,7 +67,7 @@ function listHerbs()
     //$properties = new properties();
     //$energetics = new energetics();
     //$ailments = new ailments();
-
+    $list = "";
 
     /*
     foreach ($herbList as $count => $array)
@@ -91,6 +91,7 @@ function listHerbs()
             $herbInfo[$count]['herbID'] = $data[0];
             $herbInfo[$count]['herb'] = $data[1];
             $herbInfo[$count]['warning'] = $data[5];
+            
             $propInfo ="";
 /*
             $propertyList = $properties->get_herb_properties($data[0]);
@@ -183,6 +184,7 @@ function listHerbs()
             $list .= '<a href="list_herbs.php?herb=' . $data['herbID'] . '" target="_blank">';
             $list .= $data['herb']. "&nbsp;";
             $list .= '</a><br/>';
+            /*
             if ($data['latin_name'] != "")
             {
              $list .= $data['latin_name']. "<br/>";
@@ -191,10 +193,12 @@ function listHerbs()
             {
                $list .= $data['other_names']. "<br/>";
             }
+            */
             if ($data['warning'] != "")
             {
                $list .= "<strong>WARNING: " . $data['warning']. "</strong><br/>";
-            }			
+            }
+            /*
             if ($data['properties'] != "")
             {
                $list .= "Properties: " . $data['properties'] . "<br/>";
@@ -207,6 +211,7 @@ function listHerbs()
             {
                $list .= "<strong>Ailments:</strong> " . $data['ailments'] . "<br/>";
             }
+            */
 
 	    $list .= "</p>";
   	}

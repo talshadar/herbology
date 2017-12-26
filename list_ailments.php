@@ -6,8 +6,6 @@
 #  Matthew Bryan
 #  Oct 29, 2017
 ##########################################################################
-// Report all PHP errors (see changelog)
-error_reporting(E_ALL);
 
 session_start();
 /*

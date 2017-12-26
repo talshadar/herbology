@@ -6,9 +6,6 @@
 #  Matthew Bryan
 #  Oct 29, 2017
 ##########################################################################
-// Report all PHP errors (see changelog)
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
 
 session_start();
 /*
@@ -18,13 +15,10 @@ if (!$_SESSION['conoco']['account']['userID'])
 	exit;
 }
 */
-include_once('classes/class.herbs.inc.php');
-include_once('classes/class.properties.inc.php');
-include_once('classes/class.energetics.inc.php');
-include_once('classes/class.parts.inc.php');
-include_once('classes/class.body.inc.php');
+
 $title="";
 $list="";
+
 if (!$_GET && !$_POST)
 {
   $list = listChoices();
@@ -50,7 +44,6 @@ include ('inc/header.inc.php');
 
 # now include the footer
 include ('inc/footer.inc.php');
-
 
 ########  FUNCTIONS  #######
 

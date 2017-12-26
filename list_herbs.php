@@ -96,6 +96,8 @@ function listHerbs()
             $herbInfo[$count]['herb'] = $data[1];
             $herbInfo[$count]['warning'] = $data[5];
             
+            /*
+            
             $propInfo ="";
 
             $propertyList = $properties->get_herb_properties($data[0]);
@@ -166,6 +168,8 @@ function listHerbs()
 
             $herbInfo[$count]['ailments'] = $ailmentInfo;
 
+            */
+            
   	}	
     }
 
@@ -177,9 +181,7 @@ function listHerbs()
     
     $rowStyle = 'rowoff';
     
-    
-    
-    //now start looping through the users info
+    //now start looping through the herb info
     if (!is_null($herbInfo))
     {
   	foreach ($herbInfo as $id => $data)

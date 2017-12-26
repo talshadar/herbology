@@ -9,44 +9,48 @@
 #  Oct 29, 2017
 ##########################################################################
 
-  require_once('class.dbcon.php');
-	class parts_sql
-	{
-		var $db;
+require_once('class.dbcon.php');
+class parts_sql
+{
+    var $db;
 
-		function parts_sql()
-		{
-			$this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
-//			$this->db->connect;
-		}
-		
-		function get_parts()
-		{
-			
-			$sql = "select * from parts ";
-      //echo "<br>SQL:" . $sql;
-			
-			$result = $this->db->fetch_from_db($sql);
-			return $result;			
-		}
+    public function __construct()
+    {
+        $this->db = new DBCon();
+    }
 
-		function get_herb_parts($herbID)
-		{
-		
-			$sql = "SELECT parts.term, parts.definition, parts.parts_index ";
-      $sql .= "FROM parts "; 
-      $sql .= "INNER JOIN herb_parts ";
-      $sql .= "ON parts.parts_index = herb_parts.parts_index ";
-      $sql .= "where herb_parts.herb_index = " . $herbID;
-			
-			//echo "<br>SQL:" . $sql;
-			
-			$result = $this->db->fetch_from_db($sql);
-			return $result;
-		
-		}		
-		
-  }//end clas
+    function parts_sql()
+    {
+        self::__construct();
+        //$this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
+        //$this->db->connect;
+    }
 
+    function get_parts()
+    {
 
-?>
+        $sql = "select * from parts ";
+        //echo "<br>SQL:" . $sql;
+
+        $result = $this->db->fetch_from_db($sql);
+        return $result;			
+    }
+
+    function get_herb_parts($herbID)
+    {
+
+        $sql = "SELECT parts.term, parts.definition, parts.parts_index ";
+        $sql .= "FROM parts "; 
+        $sql .= "INNER JOIN herb_parts ";
+        $sql .= "ON parts.parts_index = herb_parts.parts_index ";
+        $sql .= "where herb_parts.herb_index = " . $herbID;
+
+        //echo "<br>SQL:" . $sql;
+
+        $result = $this->db->fetch_from_db($sql);
+        return $result;
+
+    }		
+		
+}//end clas
+

@@ -1,5 +1,4 @@
 <?php
-
 ##########################################################################
 #  Herbology 
 #  Body Class
@@ -9,46 +8,47 @@
 #  Oct 29, 2017
 ##########################################################################
 
-  require_once('class.dbcon.php');
-	class body_sql
-	{
-		var $db;
+require_once('class.dbcon.php');
+class body_sql
+{
+    var $db;
 
-		function body_sql()
-		{
-			$this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
-//			$this->db->connect;
-		}
-		
-		function get_bodies()
-		{
-			
-			$sql = "select * from bodies ";
-			$sql .= " order by body";
-      //echo "<br>SQL:" . $sql;
-			
-			$result = $this->db->fetch_from_db($sql);
-			return $result;			
-		}
+    function __construct() {
+        $this->db = new DBCon();
+    }
+    
+    function body_sql()
+    {
+        self::__construct();
+        //$this->db->connect;
+    }
 
-		function get_herb_bodies($herbID)
-		{
-		
-			$sql = "SELECT bodies.body, bodies.definition, bodies.body_index ";
-      $sql .= "FROM bodies "; 
-      $sql .= "INNER JOIN herb_bodies ";
-      $sql .= "ON bodies.body_index = herb_bodies.body_index ";
-      $sql .= "where herb_bodies.herb_index = " . $herbID;
-			$sql .= " order by bodies.body ";
-			
-			//echo "<br>SQL:" . $sql;
-			
-			$result = $this->db->fetch_from_db($sql);
-			return $result;
-		
-		}	
-		
-  }//end clas
+    function get_bodies()
+    {
 
+        $sql = "select * from bodies ";
+        $sql .= " order by body";
+        //echo "<br>SQL:" . $sql;
+        
+        $result = $this->db->fetch_from_db($sql);
+        return $result;			
+    }
 
-?>
+    function get_herb_bodies($herbID)
+    {
+
+        $sql = "SELECT bodies.body, bodies.definition, bodies.body_index ";
+        $sql .= "FROM bodies "; 
+        $sql .= "INNER JOIN herb_bodies ";
+        $sql .= "ON bodies.body_index = herb_bodies.body_index ";
+        $sql .= "where herb_bodies.herb_index = " . $herbID;
+        $sql .= " order by bodies.body ";
+
+        //echo "<br>SQL:" . $sql;
+
+        $result = $this->db->fetch_from_db($sql);
+        return $result;
+
+    }	
+
+}//end clas

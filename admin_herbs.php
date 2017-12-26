@@ -59,7 +59,7 @@ function admin(){
 }
 
 </script>
- <?
+ <?php
 
 if (!$_GET && !$_POST)
 {
@@ -140,7 +140,7 @@ else
   	</tr>
   </table>
   
-  <?
+  <?php
 
   # now include the footer
   include ('inc/footer.inc.php');
@@ -316,7 +316,7 @@ var ailmentDef = {};
 var body = {};
 var bodyDef = {};
 
-<?		
+<?php
 
 			//must set propInfo and enerInfo as arrays in case they have no data
 			$propInfo[0] = "";

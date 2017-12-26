@@ -13,23 +13,26 @@ require_once('class.energetics_sql.inc.php');
 class energetics
 {
 
- 		var $dO;   //data object
+    var $dO;   //data object
+    
+    public function __construct()
+    {
+        $this->dO = new energetics_sql;
+    }
 
-		function energetics()
-		{
-			$this->dO = new energetics_sql;
-		}
+    function energetics()
+    {
+        self::__construct();
+    }
 		
-		function get_energetics()
-		{
-			return $this->dO->get_energetics();
-		}
+    function get_energetics()
+    {
+        return $this->dO->get_energetics();
+    }
 
-		function get_herb_energetics($herbID)
-		{
-			return $this->dO->get_herb_energetics($herbID);
-		}
+    function get_herb_energetics($herbID)
+    {
+        return $this->dO->get_herb_energetics($herbID);
+    }
 		
 }
-
-?>

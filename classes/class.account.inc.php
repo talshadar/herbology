@@ -12,18 +12,21 @@ require_once('class.account_sql.inc.php');
 class account
 {
 
- 		var $dO;   //data object
+    var $dO;   //data object
+    
+    public function __construct()
+    {
+        $this->dO = new account_sql;
+    }
 
-		function account()
-		{
-			$this->dO = new account_sql;
-		}
-		
-		function checkLogin($login, $pass)
-		{
-			return $this->dO->checkLogin($login, $pass);
-		}
+    function account()
+    {
+        self::__construct();
+    }
+
+    function checkLogin($login, $pass)
+    {
+        return $this->dO->checkLogin($login, $pass);
+    }
 
 }
-
-?>

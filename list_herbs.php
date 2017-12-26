@@ -9,6 +9,8 @@
 // Report all PHP errors (see changelog)
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
+ini_set('memory_limit', '-1');
+
 
 session_start();
 /*
@@ -19,25 +21,25 @@ if (!$_SESSION['conoco']['account']['userID'])
 }
 */
 include_once('classes/class.herbs.inc.php');
-//include_once('classes/class.properties.inc.php');
-//include_once('classes/class.energetics.inc.php');
-//include_once('classes/class.ailments.inc.php');
-//include_once('classes/class.parts.inc.php');
-//include_once('classes/class.body.inc.php');
+include_once('classes/class.properties.inc.php');
+include_once('classes/class.energetics.inc.php');
+include_once('classes/class.ailments.inc.php');
+include_once('classes/class.parts.inc.php');
+include_once('classes/class.body.inc.php');
 
-include ('inc/header.inc.php');
+include('inc/header.inc.php');
 
 $title="";
 $list="";
 
 if (!$_GET && !$_POST)
 {
-  $list = listHerbs();
+    $list = listHerbs();
 }
 else
 {
-  $herbID = $_GET['herb'];
-	$list .= listHerb($herbID);
+    $herbID = $_GET['herb'];
+    $list .= listHerb($herbID);
 }
 
 ?>
@@ -95,7 +97,7 @@ function listHerbs()
             $herbInfo[$count]['warning'] = $data[5];
             
             $propInfo ="";
-/*
+
             $propertyList = $properties->get_herb_properties($data[0]);
             if (!is_null($propertyList))
             {
@@ -163,7 +165,7 @@ function listHerbs()
             }
 
             $herbInfo[$count]['ailments'] = $ailmentInfo;
-*/
+
   	}	
     }
 
@@ -221,7 +223,7 @@ function listHerbs()
     }
     
 	
-	return $list;
+    return $list;
 	
 }//end listHerbs
 
@@ -229,32 +231,37 @@ function listHerbs()
 
 function listHerb($herbID)
 {
-	$herbs = new herbs;
-	$herbList = $herbs->get_herb($herbID);
-	$properties = new properties();
-	$energetics = new energetics();
-	$ailments = new ailments();
-	
-	/*
-	echo "herbs:<pre>";
- 	print_r($herbList);
- 	echo "</pre>";
-	*/
-	
-  if (!is_null($herbList))
-	{
+    $herbs = new herbs;
+    $herbList = $herbs->get_herb($herbID);
+    $properties = new properties();
+    $energetics = new energetics();
+    $ailments = new ailments();
+    $list="";    
+    $carouselCode = "";
+    $carouselSlideBtnCode = "";
+    $carouselImageCode = "";
+    $rowStyle="";
+    $carouselBtnCode = "";
 
-			$herbInfo['index'] = $herbList[0][0];
-			$herbInfo['herb'] = $herbList[0][1];
-			$herbInfo['latin_name'] = $herbList[0][2];
-			$herbInfo['other_names'] = $herbList[0][3];
-			$herbInfo['description'] = $herbList[0][4];
-			$herbInfo['warning'] = $herbList[0][5];
-			$herbInfo['nutritional'] = $herbList[0][6];
-			
-		$propInfo ="";
+    /*
+    echo "herbs:<pre>";
+    print_r($herbList);
+    echo "</pre>";
+    */
+	
+    if (!is_null($herbList))
+    {
+
+        $herbInfo['index'] = $herbList[0][0];
+        $herbInfo['herb'] = $herbList[0][1];
+        $herbInfo['latin_name'] = $herbList[0][2];
+        $herbInfo['other_names'] = $herbList[0][3];
+        $herbInfo['description'] = $herbList[0][4];
+        $herbInfo['warning'] = $herbList[0][5];
+        $herbInfo['nutritional'] = $herbList[0][6];
+
+        $propInfo ="";
 		
-
 ?>
 
 <!-- The Modal -->
@@ -282,80 +289,79 @@ var ailmentDef = {};
 
 <?PHP
 
-		$propertyList = $properties->get_herb_properties($herbID);
-		if (!is_null($propertyList))
-		{
+        $propertyList = $properties->get_herb_properties($herbID);
+        if (!is_null($propertyList))
+        {
       	
       	//echo "Properties:<pre>";
        	//print_r($propertyList);
        	//echo "</pre>";
 
 			
-			foreach ($propertyList as $propCount => $propData)
-			{
-			    //$propInfo .= $propData[0] . "(" . $propData[1] . ")";
-					
-			    $propInfo .= '<a class="propLink" propid="' . $propCount .'">' . $propData[0] . '</a>';
-					
-					if ($propCount < count($propertyList)-1)
-					{
-					  $propInfo .= ", ";
-					}
+            foreach ($propertyList as $propCount => $propData)
+            {
+                //$propInfo .= $propData[0] . "(" . $propData[1] . ")";
 
-			    echo 'property["'. $propCount. '"] = "'.$propData[0].'";';
-			    echo 'propDef["'. $propCount. '"] = "'.$propData[1].'";';
+                $propInfo .= '<a class="propLink" propid="' . $propCount .'">' . $propData[0] . '</a>';
 
-			}//end for properties loop
+                if ($propCount < count($propertyList)-1)
+                {
+                  $propInfo .= ", ";
+                }
 
-			//echo $propInfo . "<br>";
-		}
-		$herbInfo['properties'] = $propInfo;
+                echo 'property["'. $propCount. '"] = "'.$propData[0].'";';
+                echo 'propDef["'. $propCount. '"] = ' . json_encode($propData[1]) . ';';
 
-		$energInfo ="";
+            }//end for properties loop
+
+            //echo $propInfo . "<br>";
+        }
+        $herbInfo['properties'] = $propInfo;
+
+        $energInfo ="";
+
+        $energeticList = $energetics->get_herb_energetics($herbID);
+        if (!is_null($energeticList))
+        {
+            foreach ($energeticList as $energCount => $energData)
+            {
+                $energInfo .= '<a class="enerLink" enerid="' . $energCount .'">' . $energData[0] . '</a>';
+                if ($energCount < count($energeticList)-1)
+                {
+                  $energInfo .= ", ";
+                }
+
+                echo 'energetic["'. $energCount. '"] = "'.$energData[0].'";';
+                echo 'energDef["'. $energCount. '"] = ' . json_encode($energData[1]) . ';';
+
+            }
+
+            //echo $energInfo . "<br>";
+        }
+        $herbInfo['energetics'] = $energInfo;
+
+        $ailmentInfo ="";
+
+        $ailmentList = $ailments->get_herb_ailments($herbID);
+        if (!is_null($ailmentList))
+        {
+            foreach ($ailmentList as $ailmentCount => $ailmentData)
+            {
+                $ailmentInfo .= '<a class="ailmentLink" ailmentid="' . $ailmentCount .'">' . $ailmentData[0] . '</a>';
+                if ($ailmentCount < count($ailmentList)-1)
+                {
+                  $ailmentInfo .= ", ";
+                }
+
+                echo 'ailment["'. $ailmentCount. '"] = "'.$ailmentData[0].'";';
+                echo 'ailmentDef["'. $ailmentCount. '"] = ' . json_encode($ailmentData[1]) . ';';
+
+            }
+
+            //echo $energInfo . "<br>";
+        }
+        $herbInfo['ailments'] = $ailmentInfo;
 		
-		$energeticList = $energetics->get_herb_energetics($herbID);
-		if (!is_null($energeticList))
-		{
-			foreach ($energeticList as $energCount => $energData)
-			{
-			    $energInfo .= '<a class="enerLink" enerid="' . $energCount .'">' . $energData[0] . '</a>';
-					if ($energCount < count($energeticList)-1)
-					{
-					  $energInfo .= ", ";
-					}
-					
-			    echo 'energetic["'. $energCount. '"] = "'.$energData[0].'";';
-			    echo 'energDef["'. $energCount. '"] = "'.$energData[1].'";';
-					
-			}
-      	
-			//echo $energInfo . "<br>";
-		}
-		$herbInfo['energetics'] = $energInfo;
-
-		$ailmentInfo ="";
-		
-		$ailmentList = $ailments->get_herb_ailments($herbID);
-		if (!is_null($ailmentList))
-		{
-			foreach ($ailmentList as $ailmentCount => $ailmentData)
-			{
-			    $ailmentInfo .= '<a class="ailmentLink" ailmentid="' . $ailmentCount .'">' . $ailmentData[0] . '</a>';
-					if ($ailmentCount < count($ailmentList)-1)
-					{
-					  $ailmentInfo .= ", ";
-					}
-					
-			    echo 'ailment["'. $ailmentCount. '"] = "'.$ailmentData[0].'";';
-			    echo 'ailmentDef["'. $ailmentCount. '"] = "'.$ailmentData[1].'";';
-					
-			}
-      	
-			//echo $energInfo . "<br>";
-		}
-		$herbInfo['ailments'] = $ailmentInfo;
-
-			
 ?>
 
 $(document).on("click", ".propLink", function() {
@@ -395,133 +401,131 @@ $(document).on("click", ".ailmentLink", function() {
       	
 
 
-	}
+    }//end if is_null(herb_list)
 
-	$rowStyle == 'rowoff';
+    $rowStyle == 'rowoff';
 
-	//echo "<pre>";
-	//print_r($herbInfo);
-	//echo "</pre>";
-	
-  if (!is_null($herbInfo))
-  {
+    //echo "<pre>";
+    //print_r($herbInfo);
+    //echo "</pre>";
 
-	    $list .= '<table border="1" cellpadding="2" cellspacing="0" width="830px">';
-  		$list .= '<tr>';  		
-   		$list .= '<td align="left" width="300">';
-   		$list .= $herbInfo['herb']. "&nbsp;";
-   		$list .= "</td>";
-   		$list .= '<td align="left" rowspan="3">';
+    if (!is_null($herbInfo))
+    {
+
+        $list .= '<table border="1" cellpadding="2" cellspacing="0" width="830px">';
+        $list .= '<tr>';  		
+        $list .= '<td align="left" width="300">';
+        $list .= $herbInfo['herb']. "&nbsp;";
+        $list .= "</td>";
+        $list .= '<td align="left" rowspan="3">';
 			
-			/*
-			get several images for each as well - new image table for file names
-			create small angular object to let user cycle through herb-specific images		
-			*/
-
-			
-  		$herbImageList = $herbs->get_herbImages($herbID);
-  		if (!is_null($herbImageList))
-  		{
         /*
-        echo "Images:<pre>";
-        print_r($herbImageList);
-        echo "</pre>";
-  			*/
-				
-				$carouselCode = '<div id="myCarousel" class="carousel slide" data-ride="carousel" >';
-				$carouselCode .= '<!-- Indicators -->';
-				$carouselCode .= '<ol class="carousel-indicators">';
-				
-  			foreach ($herbImageList as $imageCount => $imageData)
-  			{
-  			    $imageFilename[$imageCount] = $imageData[0];
-  			    $imageDesc[$imageCount] = $imageData[1];
-						
-						$carouseSlideBtnCode .= '<li data-target="#myCarousel" data-slide-to="' . $imageCount . '"';
-						if ($imageCount == 0) { $carouselBtnCode .= ' class="active"'; };
-						$carouselSlideBtnCode .= '></li>';
-						
-						$carouselImageCode .= '<div class ="item ';
-						if ($imageCount == 0) { $carouselImageCode .= ' active'; }
-						$carouselImageCode .= '">';
-						
-						$carouselImageCode .= '<a href="images/herbs/' . $imageFilename[$imageCount] . '" target="_blank">';
-						$carouselImageCode .= '<img src="images/herbs/400x400/' . $imageFilename[$imageCount] . '" alt="' . $imageDesc[$imageCount] . '" class="carouselImage">';
-						$carouselImageCode .= '</a>';
-						$carouselImageCode .= '</div>';
-						
-  			}			
-  			
-				$carouselCode .= $carouselSlideBtnCode;
-				$carouselCode .= '</ol>';
-				$carouselCode .= '<!-- Wrapper for slides -->';
-        $carouselCode .= '<div class="carousel-inner">';
-				$carouselCode .= $carouselImageCode;
-				$carouselCode .= '</div>';
-				$carouselCode .= '<a class="left carousel-control" href="#myCarousel" data-slide="prev">';
-        $carouselCode .= '<span class="glyphicon glyphicon-chevron-left"></span>';
-        $carouselCode .= '<span class="sr-only">Previous</span>';
-        $carouselCode .= '</a>';
-        $carouselCode .= '<a class="right carousel-control" href="#myCarousel" data-slide="next">';
-        $carouselCode .= '<span class="glyphicon glyphicon-chevron-right"></span>';
-        $carouselCode .= '<span class="sr-only">Next</span>';
-        $carouselCode .= '</a>';
-        $carouselCode .= '</div>';
-				
-  		}
+        get several images for each as well - new image table for file names
+        create small angular object to let user cycle through herb-specific images		
+        */
+
 			
-			$list .= $carouselCode. "&nbsp;";
-  		$list .= "</td>";
-   		$list .= "</tr>";
-  		$list .= '<tr >'; 
-  		$list .= '<td align="left">Latin Name: ';
-   		$list .= $herbInfo['latin_name']. "&nbsp;";
-   		$list .= "</td>";
-   		$list .= "</tr>";
-  		$list .= '<tr>'; 
-  		$list .= '<td align="left">Other Names: ';
-   		$list .= $herbInfo['other_names']. "&nbsp;";
-   		$list .= "</td>";
-   		$list .= "</tr>";
-  		$list .= '<tr >'; 
-  		$list .= '<td align="left" colspan="2">';
-			$list .= $herbInfo['description']. "&nbsp;";
-  		$list .= "</td>";
-   		$list .= "</tr>";
-  		$list .= '<tr >'; 
-   		$list .= '<td align="left" colspan="2"><strong>Warnings:</strong>';
-   		$list .= $herbInfo['warning']. "&nbsp;";
-   		$list .= "</td>";
-   		$list .= "</tr>";
-  		$list .= '<tr >'; 
-   		$list .= '<td align="left" colspan="2">Nutritional: ';
-   		$list .= $herbInfo['nutritional']. "&nbsp;";
-   		$list .= "</td>";
-   		$list .= "</tr>";
-  		$list .= '<tr >'; 
-   		$list .= '<td align="left" colspan="2">';
-   		$list .= "Properties: " . $herbInfo['properties'] . "&nbsp;";
-   		$list .= "</td>";
-   		$list .= "</tr>";
-  		$list .= '<tr >'; 
-   		$list .= '<td align="left" colspan="2">';
-   		$list .= "Energetics: " . $herbInfo['energetics'] . "&nbsp;";
-   		$list .= "</td>";
-   		$list .= "</tr>";
-  		$list .= '<tr >'; 
-   		$list .= '<td align="left" colspan="2">';
-   		$list .= "<strong>Ailments:</strong> " . $herbInfo['ailments'] . "&nbsp;";
-   		$list .= "</td>";
-   		$list .= "</tr>";
-	    $list .= "</table>";
-			$list .= "<br/>";
+        $herbImageList = $herbs->get_herbImages($herbID);
+        if (!is_null($herbImageList))
+        {
+            /*
+            echo "Images:<pre>";
+            print_r($herbImageList);
+            echo "</pre>";
+            */
+
+                    
+            $carouselCode = '<div id="myCarousel" class="carousel slide" data-ride="carousel" >';
+            $carouselCode .= '<!-- Indicators -->';
+            $carouselCode .= '<ol class="carousel-indicators">';
+
+            foreach ($herbImageList as $imageCount => $imageData)
+            {
+                $imageFilename[$imageCount] = $imageData[0];
+                $imageDesc[$imageCount] = $imageData[1];
+
+                $carouselSlideBtnCode .= '<li data-target="#myCarousel" data-slide-to="' . $imageCount . '"';
+                if ($imageCount == 0) { $carouselBtnCode .= ' class="active"'; };
+                $carouselSlideBtnCode .= '></li>';
+
+                $carouselImageCode .= '<div class ="item ';
+                if ($imageCount == 0) { $carouselImageCode .= ' active'; }
+                $carouselImageCode .= '">';
+
+                $carouselImageCode .= '<a href="images/herbs/' . $imageFilename[$imageCount] . '" target="_blank">';
+                $carouselImageCode .= '<img src="images/herbs/400x400/' . $imageFilename[$imageCount] . '" alt="' . $imageDesc[$imageCount] . '" class="carouselImage">';
+                $carouselImageCode .= '</a>';
+                $carouselImageCode .= '</div>';
+
+            }			
+  			
+            $carouselCode .= $carouselSlideBtnCode;
+            $carouselCode .= '</ol>';
+            $carouselCode .= '<!-- Wrapper for slides -->';
+            $carouselCode .= '<div class="carousel-inner">';
+            $carouselCode .= $carouselImageCode;
+            $carouselCode .= '</div>';
+            $carouselCode .= '<a class="left carousel-control" href="#myCarousel" data-slide="prev">';
+            $carouselCode .= '<span class="glyphicon glyphicon-chevron-left"></span>';
+            $carouselCode .= '<span class="sr-only">Previous</span>';
+            $carouselCode .= '</a>';
+            $carouselCode .= '<a class="right carousel-control" href="#myCarousel" data-slide="next">';
+            $carouselCode .= '<span class="glyphicon glyphicon-chevron-right"></span>';
+            $carouselCode .= '<span class="sr-only">Next</span>';
+            $carouselCode .= '</a>';
+            $carouselCode .= '</div>';
+				
+        }// end if is_null(herblistimages)
+			
+        $list .= $carouselCode. "&nbsp;";
+        $list .= "</td>";
+        $list .= "</tr>";
+        $list .= '<tr >'; 
+        $list .= '<td align="left">Latin Name: ';
+        $list .= $herbInfo['latin_name']. "&nbsp;";
+        $list .= "</td>";
+        $list .= "</tr>";
+        $list .= '<tr>'; 
+        $list .= '<td align="left">Other Names: ';
+        $list .= $herbInfo['other_names']. "&nbsp;";
+        $list .= "</td>";
+        $list .= "</tr>";
+        $list .= '<tr >'; 
+        $list .= '<td align="left" colspan="2">';
+        $list .= $herbInfo['description']. "&nbsp;";
+        $list .= "</td>";
+        $list .= "</tr>";
+        $list .= '<tr >'; 
+        $list .= '<td align="left" colspan="2"><strong>Warnings:</strong>';
+        $list .= $herbInfo['warning']. "&nbsp;";
+        $list .= "</td>";
+        $list .= "</tr>";
+        $list .= '<tr >'; 
+        $list .= '<td align="left" colspan="2">Nutritional: ';
+        $list .= $herbInfo['nutritional']. "&nbsp;";
+        $list .= "</td>";
+        $list .= "</tr>";
+        $list .= '<tr >'; 
+        $list .= '<td align="left" colspan="2">';
+        $list .= "Properties: " . $herbInfo['properties'] . "&nbsp;";
+        $list .= "</td>";
+        $list .= "</tr>";
+        $list .= '<tr >'; 
+        $list .= '<td align="left" colspan="2">';
+        $list .= "Energetics: " . $herbInfo['energetics'] . "&nbsp;";
+        $list .= "</td>";
+        $list .= "</tr>";
+        $list .= '<tr >'; 
+        $list .= '<td align="left" colspan="2">';
+        $list .= "<strong>Ailments:</strong> " . $herbInfo['ailments'] . "&nbsp;";
+        $list .= "</td>";
+        $list .= "</tr>";
+        $list .= "</table>";
+        $list .= "<br/>";
   	
-  }
+    }// end if isnull(herblist)
 	
 	
-	return $list;
+    return $list;
 	
-}
-
-
-?>
+}// end listHerb function

@@ -13,23 +13,27 @@ require_once('class.parts_sql.inc.php');
 class parts
 {
 
- 		var $dO;   //data object
+    var $dO;   //data object
+    
+    public function __construct()
+    {
+        $this->dO = new parts_sql;
+    }
 
-		function parts()
-		{
-			$this->dO = new parts_sql;
-		}
-		
-		function get_parts()
-		{
-			return $this->dO->get_parts();
-		}
+    function parts()
+    {
+        self::__construct();
+    }
+    
+    function get_parts()
+    {
+        return $this->dO->get_parts();
+    }
 
-		function get_herb_parts($herbID)
-		{
-		  //echo "first function";
-			return $this->dO->get_herb_parts($herbID);
-		}
+    function get_herb_parts($herbID)
+    {
+        //echo "first function";
+        return $this->dO->get_herb_parts($herbID);
+    }
 }
 
-?>

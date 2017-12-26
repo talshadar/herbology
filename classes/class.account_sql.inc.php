@@ -7,28 +7,31 @@
 #  Oct 29, 2017
 ##########################################################################
 
-  require_once('class.dbcon.php');
-	class account_sql
-	{
-		var $db;
+require_once('class.dbcon.php');
+class account_sql
+{
+    var $db;
 
-		function account_sql()
-		{
-			$this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
-//			$this->db->connect;
-		}
+    public function __construct()
+    {
+        $this->db = new DBCon();
+    }
+
+    function account_sql()
+    {
+        self::__construct();
+        //$this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
+//          $this->db->connect;
+    } 
 		
-		function checkLogin($login, $pass)
-		{
-			
-			$sql = "select account_Index, name from account where login = '" . $login . "' and passwd = password('" . $pass . "')";
+    function checkLogin($login, $pass)
+    {
+
+        $sql = "select account_Index, name from account where login = '" . $login . "' and passwd = password('" . $pass . "')";
       //echo "<br>SQL:" . $sql;
 			
-			$result = $this->db->fetch_from_db($sql);
-			return $result;			
-		}
+        $result = $this->db->fetch_from_db($sql);
+        return $result;			
+    }
 
-  }//end clas
-
-
-?>
+}//end clas

@@ -8,7 +8,6 @@
 #  Oct 29, 2017
 ##########################################################################
 
-
 require_once('class.properties_sql.inc.php');
 
 class properties
@@ -16,7 +15,7 @@ class properties
 
     var $dO;   //data object
     
-    public function __contruct()
+    public function __construct()
     {
         $this->dO = new properties_sql;
     }
@@ -24,8 +23,8 @@ class properties
     function properties()
     {
         self::__construct();
-    }
-
+    }   
+    
     function get_properties()
     {
         return $this->dO->get_properties();
@@ -37,5 +36,3 @@ class properties
         return $this->dO->get_herb_properties($herbID);
     }
 }
-
-?>

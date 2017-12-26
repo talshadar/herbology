@@ -6,19 +6,22 @@
 #  Matthew Bryan
 #  Oct 29, 2017
 ##########################################################################
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-ini_set('memory_limit', '-1');
 
-  class DBCon {
+class DBCon
+{
     private $connection; // this is where the object will store the connection for other methods to access it
-
-    public function __construct($host, $username, $password, $database)
+    private $host = 'localhost';
+    private $username = 'herbadmin';
+    private $password = 'passwd';
+    private $database = 'herbology';
+    //'localhost', 'herbadmin', 'passwd', 'herbology'
+    
+    public function __construct()
     {
-        $this->connection = mysqli_connect($host, $username, $password, $database);
-        if ($host) 
+        $this->connection = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+        if ($this->host) 
 	{
-            $this->connection->select_db($database); 
+            $this->connection->select_db($this->database); 
             if (!$this->connection) 
             {
                 die('An error occured while trying to connect to the database.');
@@ -28,51 +31,54 @@ ini_set('memory_limit', '-1');
     }
 
     // this is so databaseConnection $db can access the connection for escaping MySQLi SQL
-    public function connection(){
+    public function connection()
+    {
          return $this->connection;
     }
 
-    function fetch_from_db($query) {
+    function fetch_from_db($query)
+    {
         //$query = mysqli_query($connection->$connection, 'QUERY');
         $result = $this->connection->query($query);
         $dataSet = Array();
 				
-        if ($this->connection->error) {
+        if ($this->connection->error)
+        {
           print("Query failed: %s\n" . $this->connection->error);
           exit;
-        }      
-        while($row = $result->fetch_row()) {
+        }
+        
+        while($row = $result->fetch_row())
+        {
           $dataSet[]=$row;
         }
+        
         $result->close();
 				
         return $dataSet;
     }
 		
-		function insert_to_db($query)
-		{
+    function insert_to_db($query)
+    {
         $result = $this->connection->query($query);
-		}
+    }
 		
-		function update_to_db($query)
-		{
+    function update_to_db($query)
+    {
         $result = $this->connection->query($query);
-		}
+    }
 
-		function delete_from_db($query)
-		{
+    function delete_from_db($query)
+    {
         $result = $this->connection->query($query);
-		}
+    }
 				
-		
-
     // this is a magic function that is called when the object is destroyed, so we will close the connection to avoid to many connections
-    function __destruct(){
+    function __destruct()
+    {
       $this->connection()->close();
     }
 		
 		
 }//end class
 
-
-?>

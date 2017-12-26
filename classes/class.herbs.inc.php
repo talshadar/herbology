@@ -6,10 +6,6 @@
 #  Matthew Bryan
 #  Oct 29, 2017
 ##########################################################################
-// Report all PHP errors (see changelog)
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-ini_set('memory_limit', '-1');
 
 require_once('class.herbs_sql.inc.php');
 
@@ -19,7 +15,7 @@ class herbs
     var $dO;   //data object
 
     public function __construct() {
-        $this->dO = new herbs_sql;;
+        $this->dO = new herbs_sql;
     }
 
     function herbs()

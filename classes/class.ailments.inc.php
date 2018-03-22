@@ -43,6 +43,6 @@ class ailments
     function get_ailment_herbs($ailmentID)
     {
         return $this->dO->get_ailment_herbs($ailmentID);
-    }
+    }   
     
 }

@@ -54,7 +54,17 @@ class energetics_sql
         return $result;
 		
     }
+    
+    function get_energetic($energID)
+    {
 
+        $sql = "select * from energetics ";
+        $sql .= "where energetics_index = " . $energID;
+      //echo "<br>SQL:" . $sql;
+			
+        $result = $this->db->fetch_from_db($sql);
+        return $result;			
+    }
     
 }//end clas
 

@@ -279,16 +279,9 @@ function listHerb($herbID)
 
 
 <script>
-var property = {};
-var propDef = {};
 
-var energetic = {};
-var energDef = {};
-
-var ailment = {};
-var ailmentDef  = {};
-
-function showInfo(str) {
+function showPropInfo(str)
+{
     if (str == "") {
         document.getElementById("txtHint").innerHTML = "NOT FOUND";
         return;
@@ -302,7 +295,9 @@ function showInfo(str) {
         }
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("txtHint").innerHTML = this.responseText;
+                document.getElementById("myModalContent").innerHTML = this.responseText;
+                $("#myModalTitle").html("Definition:");
+                $("#myModal").modal("show");
             }
         };
         xmlhttp.open("GET","jsPhpFunctions.php?which=getProperty&id="+str,true);
@@ -310,9 +305,58 @@ function showInfo(str) {
     }
 }
 
+function showEnerInfo(str)
+{
+    if (str == "") {
+        document.getElementById("myModalContent").innerHTML = "NOT FOUND";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("myModalContent").innerHTML = this.responseText;
+                $("#myModalTitle").html("Definition:");
+                $("#myModal").modal("show");
+            }
+        };
+        xmlhttp.open("GET","jsPhpFunctions.php?which=getEnergetic&id="+str,true);
+        xmlhttp.send();
+    }
+}
 
-<?PHP
+function showAilInfo(str)
+{
+    if (str == "") {
+        document.getElementById("myModalContent").innerHTML = "NOT FOUND";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("myModalContent").innerHTML = this.responseText;
+                $("#myModalTitle").html("Definition:");
+                $("#myModal").modal("show");
+            }
+        };
+        xmlhttp.open("GET","jsPhpFunctions.php?which=getAilment&id="+str,true);
+        xmlhttp.send();
+    }
+}
 
+<?PHP	
+        
         $propertyList = $properties->get_herb_properties($herbID);
         if (!is_null($propertyList))
         {
@@ -323,21 +367,17 @@ function showInfo(str) {
             //echo "Properties:<pre>";
             //print_r($propertyList);
             //echo "</pre>";
-
 			
             foreach ($propertyList as $propCount => $propData)
             {
                 //$propInfo .= $propData[0] . "(" . $propData[1] . ")";
 
-                $propInfo .= '<a class="testLink"  onclick="showInfo(' . $propData[2] .')"  propid="' . $propCount .'">' . $propData[0] . '</a>';
+                $propInfo .= '<a class="propLink"  onclick="showPropInfo(' . $propData[2] .')"  propid="' . $propCount .'">' . $propData[0] . '</a>';
 
                 if ($propCount < count($propertyList)-1)
                 {
                   $propInfo .= ", ";
                 }
-
-                echo 'property["'. $propCount. '"] = "'.$propData[0].'";';
-                echo 'propDef["'. $propCount. '"] = ' . json_encode($propData[1]) . ';';
 
             }//end for properties loop
 
@@ -352,14 +392,11 @@ function showInfo(str) {
         {
             foreach ($energeticList as $energCount => $energData)
             {
-                $energInfo .= '<a class="enerLink" enerid="' . $energCount .'">' . $energData[0] . '</a>';
+                $energInfo .= '<a class="enerLink" onclick="showEnerInfo(' . $energData[2] .')"  enerid="' . $energCount .'">' . $energData[0] . '</a>';
                 if ($energCount < count($energeticList)-1)
                 {
                   $energInfo .= ", ";
                 }
-
-                echo 'energetic["'. $energCount. '"] = "'.$energData[0].'";';
-                echo 'energDef["'. $energCount. '"] = ' . json_encode($energData[1]) . ';';
 
             }
 
@@ -374,14 +411,11 @@ function showInfo(str) {
         {
             foreach ($ailmentList as $ailmentCount => $ailmentData)
             {
-                $ailmentInfo .= '<a class="ailmentLink" ailmentid="' . $ailmentCount .'">' . $ailmentData[0] . '</a>';
+                $ailmentInfo .= '<a class="ailmentLink" onclick="showAilInfo(' . $ailmentData[2] .')"  ailmentid="' . $ailmentCount .'">' . $ailmentData[0] . '</a>';
                 if ($ailmentCount < count($ailmentList)-1)
                 {
                   $ailmentInfo .= ", ";
                 }
-
-                echo 'ailment["'. $ailmentCount. '"] = "'.$ailmentData[0].'";';
-                echo 'ailmentDef["'. $ailmentCount. '"] = ' . json_encode($ailmentData[1]) . ';';
 
             }
 
@@ -391,37 +425,12 @@ function showInfo(str) {
 		
 ?>
 
-$(document).on("click", ".propLink", function() {
-  var id = $(this).attr("propid");
-	var defTitle = 'Definition: ' + property[id];
-	$("#myModalTitle").html(defTitle);
-  $("#myModalContent").html(propDef[id]);
-  $("#myModal").modal("show");
-});
-
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
        myModal.style.display = "none";
     }
 }
-
-$(document).on("click", ".enerLink", function() {
-  var id = $(this).attr("enerid");
-	var defEnerTitle = 'Definition: ' + energetic[id];
-	$("#myModalTitle").html(defEnerTitle);
-  $("#myModalContent").html(energDef[id]);
-  $("#myModal").modal("show");
-});
-
-$(document).on("click", ".ailmentLink", function() {
-  var id = $(this).attr("ailmentid");
-	var defailmentTitle = 'Definition: ' + ailment[id];
-	$("#myModalTitle").html(defailmentTitle);
-  $("#myModalContent").html(ailmentDef[id]);
-  $("#myModal").modal("show");
-});
 
 
 </script>

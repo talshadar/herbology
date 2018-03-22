@@ -34,5 +34,10 @@ class energetics
     {
         return $this->dO->get_herb_energetics($herbID);
     }
-		
+    
+    function get_energetic($energID)
+    {
+        return $this->dO->get_energetic($energID);
+    }
+    
 }

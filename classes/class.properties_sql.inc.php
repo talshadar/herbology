@@ -51,6 +51,20 @@ class properties_sql
         return $result;
 
     }
+    
+    function get_property($propID)
+    {
+
+        $sql = "SELECT * ";
+        $sql .= "FROM properties "; 
+        $sql .= "WHERE properties_index = " .$propID;
+        //echo "<br>SQL:" . $sql;
+
+        $result = $this->db->fetch_from_db($sql);
+        return $result;
+
+    }    
+    
 	
 /*
 SELECT properties.term 

@@ -286,24 +286,50 @@ var energetic = {};
 var energDef = {};
 
 var ailment = {};
-var ailmentDef = {};
+var ailmentDef  = {};
+
+function showInfo(str) {
+    if (str == "") {
+        document.getElementById("txtHint").innerHTML = "NOT FOUND";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","jsPhpFunctions.php?which=getProperty&id="+str,true);
+        xmlhttp.send();
+    }
+}
+
 
 <?PHP
 
         $propertyList = $properties->get_herb_properties($herbID);
         if (!is_null($propertyList))
         {
-      	
-      	//echo "Properties:<pre>";
-       	//print_r($propertyList);
-       	//echo "</pre>";
+            //$propData[0] = property term
+            //$propData[1] = property definition
+            //$propData[2] = property id
+            
+            //echo "Properties:<pre>";
+            //print_r($propertyList);
+            //echo "</pre>";
 
 			
             foreach ($propertyList as $propCount => $propData)
             {
                 //$propInfo .= $propData[0] . "(" . $propData[1] . ")";
 
-                $propInfo .= '<a class="propLink" propid="' . $propCount .'">' . $propData[0] . '</a>';
+                $propInfo .= '<a class="testLink"  onclick="showInfo(' . $propData[2] .')"  propid="' . $propCount .'">' . $propData[0] . '</a>';
 
                 if ($propCount < count($propertyList)-1)
                 {
@@ -396,6 +422,7 @@ $(document).on("click", ".ailmentLink", function() {
   $("#myModalContent").html(ailmentDef[id]);
   $("#myModal").modal("show");
 });
+
 
 </script>
 <?PHP
@@ -521,6 +548,13 @@ $(document).on("click", ".ailmentLink", function() {
         $list .= "<strong>Ailments:</strong> " . $herbInfo['ailments'] . "&nbsp;";
         $list .= "</td>";
         $list .= "</tr>";
+        
+        $list .= '<tr >'; 
+        $list .= '<td align="left" colspan="2">';
+        $list .= '<strong>Testing</strong> <div id="txtHint"><b>Info on item here</b></div>&nbsp;';
+        $list .= "</td>";
+        $list .= "</tr>";
+        
         $list .= "</table>";
         $list .= "<br/>";
   	

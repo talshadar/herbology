@@ -32,7 +32,11 @@ class properties
 
     function get_herb_properties($herbID)
     {
-        //echo "first function";
         return $this->dO->get_herb_properties($herbID);
+    }
+    
+    function get_property($propID)
+    {
+        return $this->dO->get_property($propID);
     }
 }

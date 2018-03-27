@@ -69,23 +69,58 @@ function listHerbs()
     $herbList = $herbs->get_herbs();
     //$properties = new properties();
     //$energetics = new energetics();
-    //$ailments = new ailments();
+    $ailments = new ailments();
     $list = "";
-
-    /*
-    foreach ($herbList as $count => $array)
-    {
-        $newArray[$count] = set_array_names($array,'docDwg');
-    }
-    unset($docdwgList);
-    $docdwgList = $newArray;
-    */
 
     /*
     echo "Herb List 1<pre>";
     print_r($herbList);
     echo "</pre>";
     */
+?>
+
+<!-- The Modal -->
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" id="myModalTitle">
+      </div>
+      <div class="modal-body" id="myModalContent">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+
+<script>
+
+function showAilInfo(str)
+{
+    if (str == "") {
+        document.getElementById("myModalContent").innerHTML = "NOT FOUND";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("myModalContent").innerHTML = this.responseText;
+                $("#myModalTitle").html("Definition:");
+                $("#myModal").modal("show");
+            }
+        };
+        xmlhttp.open("GET","jsPhpFunctions.php?which=getAilment&id="+str,true);
+        xmlhttp.send();
+    }
+}
+</script>
+<?PHP    
+
 	
     if (!is_null($herbList))
     {
@@ -94,80 +129,25 @@ function listHerbs()
             $herbInfo[$count]['herbID'] = $data[0];
             $herbInfo[$count]['herb'] = $data[1];
             $herbInfo[$count]['warning'] = $data[5];
-            
-            /*
-            
-            $propInfo ="";
-
-            $propertyList = $properties->get_herb_properties($data[0]);
-            if (!is_null($propertyList))
-            {
-
-            //echo "Properties:<pre>";
-            //print_r($propertyList);
-            //echo "</pre>";
-
-                foreach ($propertyList as $propCount => $propData)
-                {
-                    $propInfo .= $propData[0];
-                    if ($propCount < count($propertyList)-1)
-                    {
-                      $propInfo .= ", ";
-                    }
-                }
-
-                    //echo $propInfo . "<br>";
-            }
-
-            $herbInfo[$count]['properties'] = $propInfo;
-
-            $energInfo ="";
-
-            $energeticList = $energetics->get_herb_energetics($data[0]);
-            if (!is_null($energeticList))
-            {
-
-                //echo "Properties:<pre>";
-                //print_r($propertyList);
-                //echo "</pre>";
-
-                foreach ($energeticList as $energCount => $energData)
-                {
-                    $energInfo .= $energData[0];
-                    if ($energCount < count($energeticList)-1)
-                    {
-                      $energInfo .= ", ";
-                    }
-                }
-
-                //echo $energInfo . "<br>";
-            }
-
-            $herbInfo[$count]['energetics'] = $energInfo;
 
             $ailmentInfo ="";
             $ailmentList = $ailments->get_herb_ailments($data[0]);
             if (!is_null($ailmentList))
             {
-
-                //echo "Properties:<pre>";
-                //print_r($propertyList);
-                //echo "</pre>";
-
                 foreach ($ailmentList as $ailmentCount => $ailmentData)
                 {
-                    $ailmentInfo .= $ailmentData[0];
+                    //$ailmentInfo .= $ailmentData[0];
+                    $ailmentInfo .= '<a class="ailmentLink" onclick="showAilInfo(' . $ailmentData[2] .')"  ailmentid="' . $ailmentCount .'">' . $ailmentData[0] . '</a>';
+
                     if ($ailmentCount < count($ailmentList)-1)
                     {
                       $ailmentInfo .= ", ";
                     }
                 }
-                //echo $energInfo . "<br>";
             }
 
             $herbInfo[$count]['ailments'] = $ailmentInfo;
-
-            */
+    
             
   	}	
     }
@@ -183,44 +163,39 @@ function listHerbs()
     //now start looping through the herb info
     if (!is_null($herbInfo))
     {
+        $list = '<div class="table-responsive">';
+        $list = '<table class="table table-striped">';
+        $list .= '<tbody>';
+        
+        
   	foreach ($herbInfo as $id => $data)
   	{
-            $rowStyle == 'rowon' ? $rowStyle = 'rowoff' : $rowStyle = 'rowon';
-            $list .= '<p class="' . $rowStyle . '">';
+            //$rowStyle == 'rowon' ? $rowStyle = 'rowoff' : $rowStyle = 'rowon';
+            //$list .= '<p class="' . $rowStyle . '">';
+            $list .= '<tr>';
+            $list .= '<td>';
+            $list .= '<p class="text-info">';
             $list .= '<a href="list_herbs.php?herb=' . $data['herbID'] . '" target="_blank">';
             $list .= $data['herb']. "&nbsp;";
-            $list .= '</a><br/>';
-            /*
-            if ($data['latin_name'] != "")
-            {
-             $list .= $data['latin_name']. "<br/>";
-            }
-            if ($data['other_names'] != "")
-            {
-               $list .= $data['other_names']. "<br/>";
-            }
-            */
+            $list .= '</a></p>';
+
             if ($data['warning'] != "")
             {
-               $list .= "<strong>WARNING: " . $data['warning']. "</strong><br/>";
+               $list .= "<p class='text-danger'>WARNING: " . $data['warning'] . "</p>";
             }
-            /*
-            if ($data['properties'] != "")
-            {
-               $list .= "Properties: " . $data['properties'] . "<br/>";
-            }
-            if ($data['energetics'] != "")
-            {
-               $list .= "Energetics: " . $data['energetics'] . "<br/>";
-            }
+
             if ($data['ailments'] != "")
             {
-               $list .= "<strong>Ailments:</strong> " . $data['ailments'] . "<br/>";
+               $list .= '<p class="text-info"> <strong>Ailments:</strong> ' . $data['ailments'] . "</p>";
             }
-            */
-
-	    $list .= "</p>";
+            
+            $list .= '</td>';
+            $list .= '</tr>';
   	}
+        
+        $list .= '</tbody>';
+        $list .= '</table>';
+        $list .= '</div>';
     }
     
 	
@@ -438,10 +413,13 @@ function showAilInfo(str)
     //print_r($herbInfo);
     //echo "</pre>";
 
+    $list = '<div class="container">';
+    
     if (!is_null($herbInfo))
     {
-
-        $list .= '<table border="1" cellpadding="2" cellspacing="0" width="830px">';
+        $list .= '<div class="table-responsive">';
+        $list .= '<table class="table">';
+        $list .= '<tbody>';
         $list .= '<tr>';  		
         $list .= '<td align="left" width="300">';
         $list .= $herbInfo['herb']. "&nbsp;";
@@ -524,8 +502,8 @@ function showAilInfo(str)
         $list .= $herbInfo['description']. "&nbsp;";
         $list .= "</td>";
         $list .= "</tr>";
-        $list .= '<tr >'; 
-        $list .= '<td align="left" colspan="2"><strong>Warnings:</strong>';
+        $list .= '<tr class="danger">'; 
+        $list .= '<td class="danger" align="left" colspan="2"><strong>Warnings:</strong>';
         $list .= $herbInfo['warning']. "&nbsp;";
         $list .= "</td>";
         $list .= "</tr>";
@@ -550,11 +528,13 @@ function showAilInfo(str)
         $list .= "</td>";
         $list .= "</tr>";
         
+        $list .= '</tbody>';
         $list .= "</table>";
-        $list .= "<br/>";
+        $list .= "</div";
   	
     }// end if isnull(herblist)
-	
+
+    $list .= '</div>';
 	
     return $list;
 	

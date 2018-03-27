@@ -28,8 +28,12 @@ body
   cursor: pointer;
 }
 
-
 .enerLink
+{
+  cursor: pointer;
+}
+
+.ailmentLink
 {
   cursor: pointer;
 }

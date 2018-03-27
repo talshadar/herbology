@@ -20,7 +20,6 @@ class body_sql
     function body_sql()
     {
         self::__construct();
-        //$this->db->connect;
     }
 
     function get_bodies()

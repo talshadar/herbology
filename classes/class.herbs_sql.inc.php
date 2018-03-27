@@ -22,8 +22,6 @@ class herbs_sql
     function herbs_sql()
     {
         self::__construct();
-        //$this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
-        //$this->db->connect;
     }
 
     function get_herbs($filter="", $order="")

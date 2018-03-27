@@ -22,7 +22,6 @@ class parts_sql
     function parts_sql()
     {
         self::__construct();
-        //$this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
         //$this->db->connect;
     }
 

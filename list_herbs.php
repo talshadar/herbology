@@ -266,7 +266,7 @@ function listHerb($herbID)
 ?>
 
 <!-- The Modal -->
-<div id="myModal" class="modal">
+<div id="myModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" id="myModalTitle">
@@ -423,15 +423,7 @@ function showAilInfo(str)
         }
         $herbInfo['ailments'] = $ailmentInfo;
 		
-?>
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-       myModal.style.display = "none";
-    }
-}
-
+?> 
 
 </script>
 <?PHP
@@ -555,12 +547,6 @@ window.onclick = function(event) {
         $list .= '<tr >'; 
         $list .= '<td align="left" colspan="2">';
         $list .= "<strong>Ailments:</strong> " . $herbInfo['ailments'] . "&nbsp;";
-        $list .= "</td>";
-        $list .= "</tr>";
-        
-        $list .= '<tr >'; 
-        $list .= '<td align="left" colspan="2">';
-        $list .= '<strong>Testing</strong> <div id="txtHint"><b>Info on item here</b></div>&nbsp;';
         $list .= "</td>";
         $list .= "</tr>";
         

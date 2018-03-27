@@ -21,8 +21,6 @@ class ailments_sql
     function ailments_sql()
     {
         self::__construct();
-        //$this->db = new DBCon('localhost', 'herbadmn', 'passwd', 'herbology');
-        //$this->db->connect;
     } 
 
 

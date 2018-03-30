@@ -32,7 +32,7 @@
             </div>
             <ul class="nav navbar-nav" >
               <li><a href="about.php">About</a></li>
-              <li><a href="http://bryandevelopment.ca/herbBlog/index.php" target="_newBlog">Blog</a></li>
+              <li><a href="http://bryandevelopment.ca/herbBlog/index.php" target="_blank">Blog</a></li>
             </ul>
 
             <form class="navbar-form navbar-left" action="search.php">

@@ -8,23 +8,16 @@
 ##########################################################################
 
 session_start();
-/*
-if (!$_SESSION['conoco']['account']['userID'])
-{
-	header("Location: login.php");
-	exit;
-}
-*/
-
 
 include ('inc/header.inc.php');
 
+?>
+
+HOME
+
+<?PHP
 
 # now include the footer
 include ('inc/footer.inc.php');
-
-########  FUNCTIONS  #######
-
-
 
 ?>

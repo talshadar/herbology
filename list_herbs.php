@@ -41,19 +41,20 @@ else
     $list .= listHerb($herbID);
 }
 
+echo $list;
 ?>
-
-<table border="0" cellpadding="0" cellspacing="0" width = "80%">
+<!--
+<table border="0" cellpadding="0" cellspacing="0" width = "100%">
     <tr valign="middle">
         <td align="left"><br>
-            <?PHP echo $title; ?>
+            <?PHP //echo $title; ?>
         </td>
     </tr>
     <tr>
-        <td> <?PHP echo $list; ?> </td>
+        <td> <?PHP //echo $list; ?> </td>
     </tr>
 </table>
-
+-->
 <?PHP
 
 
@@ -157,23 +158,19 @@ function showAilInfo(str)
     print_r($herbInfo);
     echo "</pre>";
     */
-    
-    $rowStyle = 'rowoff';
-    
+    $list .= '<div class="container">';
     //now start looping through the herb info
     if (!is_null($herbInfo))
     {
-        $list = '<div class="table-responsive">';
+        //$list = '<div class="table-responsive">';
         $list = '<table class="table table-striped">';
         $list .= '<tbody>';
         
         
   	foreach ($herbInfo as $id => $data)
   	{
-            //$rowStyle == 'rowon' ? $rowStyle = 'rowoff' : $rowStyle = 'rowon';
-            //$list .= '<p class="' . $rowStyle . '">';
             $list .= '<tr>';
-            $list .= '<td>';
+            $list .= '<td colspan="2">';
             $list .= '<p class="text-info">';
             $list .= '<a href="list_herbs.php?herb=' . $data['herbID'] . '" target="_blank">';
             $list .= $data['herb']. "&nbsp;";
@@ -195,9 +192,9 @@ function showAilInfo(str)
         
         $list .= '</tbody>';
         $list .= '</table>';
-        $list .= '</div>';
+        //$list .= '</div>';
     }
-    
+    $list .= '</div>';
 	
     return $list;
 	
@@ -407,8 +404,6 @@ function showAilInfo(str)
 
     }//end if is_null(herb_list)
 
-    $rowStyle == 'rowoff';
-
     //echo "<pre>";
     //print_r($herbInfo);
     //echo "</pre>";
@@ -417,11 +412,10 @@ function showAilInfo(str)
     
     if (!is_null($herbInfo))
     {
-        $list .= '<div class="table-responsive">';
         $list .= '<table class="table">';
         $list .= '<tbody>';
         $list .= '<tr>';  		
-        $list .= '<td align="left" width="300">';
+        $list .= '<td align="left" width="50%">';
         $list .= $herbInfo['herb']. "&nbsp;";
         $list .= "</td>";
         $list .= '<td align="left" rowspan="3">';
@@ -530,7 +524,6 @@ function showAilInfo(str)
         
         $list .= '</tbody>';
         $list .= "</table>";
-        $list .= "</div";
   	
     }// end if isnull(herblist)
 

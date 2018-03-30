@@ -24,32 +24,32 @@
 <body bgcolor="#FFFFFF" >
 <div class="container">
     
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="index.php">Herbology</a>
-        </div>
-        <ul class="nav navbar-nav" >
-          <li><a href="about.php">About</a></li>
-          <li><a href="/blog/index.php">Blog</a></li>
-        </ul>
-          
-        <form class="navbar-form navbar-left" action="search.php">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>          
-      </div>
-      
-        <img class="img-responsive" src="images/header.png" alt="Photo by Lisa Hobbs on Unsplash"> 
-      
-    </nav>
-     
-     <div class="header-btns">
-         <a href="list_formulas.php" class="btn btn-success pull-right" role="button">Formulas</a>
-         <a href="list_ailments.php" class="btn btn-success pull-right" role="button">Ailments</a>
-         <a href="list_herbs.php" class="btn btn-success pull-right" role="button">Herbs</a>
-     </div>
 
-    
+        <nav class="navbar navbar-inverse ">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="index.php">Herbology</a>
+            </div>
+            <ul class="nav navbar-nav" >
+              <li><a href="about.php">About</a></li>
+              <li><a href="http://bryandevelopment.ca/herbBlog/index.php" target="_newBlog">Blog</a></li>
+            </ul>
+
+            <form class="navbar-form navbar-left" action="search.php">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>          
+          </div>
+
+            <img class="img-responsive" src="images/header.png" alt="Photo by Lisa Hobbs on Unsplash"> 
+
+        </nav>
+
+        <div class="header-btns">
+            <a href="list_formulas.php" class="btn btn-success pull-right" role="button">Formulas</a>
+            <a href="list_ailments.php" class="btn btn-success pull-right" role="button">Ailments</a>
+            <a href="list_herbs.php" class="btn btn-success pull-right" role="button">Herbs</a>
+        </div>
+

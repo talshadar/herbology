@@ -41,21 +41,9 @@ else
     $list .= listHerb($herbID);
 }
 
+$list .= '<div class="container">';
 echo $list;
-?>
-<!--
-<table border="0" cellpadding="0" cellspacing="0" width = "100%">
-    <tr valign="middle">
-        <td align="left"><br>
-            <?PHP //echo $title; ?>
-        </td>
-    </tr>
-    <tr>
-        <td> <?PHP //echo $list; ?> </td>
-    </tr>
-</table>
--->
-<?PHP
+$list .= '</div>';
 
 
 # now include the footer
@@ -158,7 +146,6 @@ function showAilInfo(str)
     print_r($herbInfo);
     echo "</pre>";
     */
-    $list .= '<div class="container">';
     //now start looping through the herb info
     if (!is_null($herbInfo))
     {
@@ -166,13 +153,12 @@ function showAilInfo(str)
         $list = '<table class="table table-striped">';
         $list .= '<tbody>';
         
-        
   	foreach ($herbInfo as $id => $data)
   	{
             $list .= '<tr>';
-            $list .= '<td colspan="2">';
+            $list .= '<td>';
             $list .= '<p class="text-info">';
-            $list .= '<a href="list_herbs.php?herb=' . $data['herbID'] . '" target="_blank">';
+            $list .= '<a href="list_herbs.php?herb=' . $data['herbID'] . '" >';
             $list .= $data['herb']. "&nbsp;";
             $list .= '</a></p>';
 
@@ -194,7 +180,6 @@ function showAilInfo(str)
         $list .= '</table>';
         //$list .= '</div>';
     }
-    $list .= '</div>';
 	
     return $list;
 	
@@ -327,6 +312,8 @@ function showAilInfo(str)
     }
 }
 
+</script>
+
 <?PHP	
         
         $propertyList = $properties->get_herb_properties($herbID);
@@ -393,14 +380,7 @@ function showAilInfo(str)
 
             //echo $energInfo . "<br>";
         }
-        $herbInfo['ailments'] = $ailmentInfo;
-		
-?> 
-
-</script>
-<?PHP
-      	
-
+        $herbInfo['ailments'] = $ailmentInfo;	
 
     }//end if is_null(herb_list)
 
@@ -415,8 +395,19 @@ function showAilInfo(str)
         $list .= '<table class="table">';
         $list .= '<tbody>';
         $list .= '<tr>';  		
-        $list .= '<td align="left" width="50%">';
-        $list .= $herbInfo['herb']. "&nbsp;";
+        $list .= '<td align="left" width="50%" class="text-success">';
+        $list .= $herbInfo['herb'] . "(" . $herbInfo['latin_name'] . ")";
+        
+
+        $list .= '<p class="text-danger">'; 
+        $list .= '<strong>Warnings:</strong>';
+        $list .= $herbInfo['warning']. "&nbsp;";
+        $list .= "</p>";
+
+        $list .= '<p class="text-secondary">Other Names: ';
+        $list .= $herbInfo['other_names']. "&nbsp;";
+        $list .= "<p>";
+        
         $list .= "</td>";
         $list .= '<td align="left" rowspan="3">';
 			
@@ -434,8 +425,7 @@ function showAilInfo(str)
             print_r($herbImageList);
             echo "</pre>";
             */
-
-                    
+    
             $carouselCode = '<div id="myCarousel" class="carousel slide" data-ride="carousel" >';
             $carouselCode .= '<!-- Indicators -->';
             $carouselCode .= '<ol class="carousel-indicators">';
@@ -482,28 +472,13 @@ function showAilInfo(str)
         $list .= "</td>";
         $list .= "</tr>";
         $list .= '<tr >'; 
-        $list .= '<td align="left">Latin Name: ';
-        $list .= $herbInfo['latin_name']. "&nbsp;";
-        $list .= "</td>";
-        $list .= "</tr>";
-        $list .= '<tr>'; 
-        $list .= '<td align="left">Other Names: ';
-        $list .= $herbInfo['other_names']. "&nbsp;";
+        $list .= '<td class="text-primary">';
+        $list .= $herbInfo['description'];
         $list .= "</td>";
         $list .= "</tr>";
         $list .= '<tr >'; 
-        $list .= '<td align="left" colspan="2">';
-        $list .= $herbInfo['description']. "&nbsp;";
-        $list .= "</td>";
-        $list .= "</tr>";
-        $list .= '<tr class="danger">'; 
-        $list .= '<td class="danger" align="left" colspan="2"><strong>Warnings:</strong>';
-        $list .= $herbInfo['warning']. "&nbsp;";
-        $list .= "</td>";
-        $list .= "</tr>";
-        $list .= '<tr >'; 
-        $list .= '<td align="left" colspan="2">Nutritional: ';
-        $list .= $herbInfo['nutritional']. "&nbsp;";
+        $list .= '<td class="text-info">Nutritional: ';
+        $list .= $herbInfo['nutritional'];
         $list .= "</td>";
         $list .= "</tr>";
         $list .= '<tr >'; 

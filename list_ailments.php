@@ -58,7 +58,6 @@ else
 </div>
 
 <?PHP
-echo $list;
 
 # now include the footer
 include ('inc/footer.inc.php');
@@ -76,7 +75,7 @@ function listAilments()
 	$ailmentList = $ailments->get_ailments();
 	
   if (!is_null($ailmentList))
-	{
+    {
   	foreach ($ailmentList as $count => $data)
   	{
   			$ailmentInfo[$count]['ailmentID'] = $data[0];
@@ -84,148 +83,195 @@ function listAilments()
   			$ailmentInfo[$count]['description'] = $data[2];
 
   	}	
-	}
+    }
 
   
- 	//echo "<pre>";
- 	//print_r($ailmentInfo);
- 	//echo "</pre>";
-		
-	$rowStyle = 'rowoff';
-	//now start looping through the users info
-  if (!is_null($ailmentInfo))
-  {
+    //echo "<pre>";
+    //print_r($ailmentInfo);
+    //echo "</pre>";
+    $list = '<table class="table table-striped">';
+    $list .= '<tbody>';
+    //now start looping through the ailments
+    if (!is_null($ailmentInfo))
+    {
+        $count = 1;
   	foreach ($ailmentInfo as $id => $data)
   	{
-  		$rowStyle == 'rowon' ? $rowStyle = 'rowoff' : $rowStyle = 'rowon';
-	    $list .= '<p class="' . $rowStyle . '">';
-			$list .= '<a href="list_ailments.php?ailment=' . $data['ailmentID'] . '" >';
-   		$list .= $data['ailment']. "&nbsp;";
-			$list .= '</a><br/>';
-			if ($data['description'] != "")
-			{
-   		   $list .= $data['description']. "<br/>";
-			}
 
-	    $list .= "</p>";
+            switch ($count)
+            {
+                case 1:
+                    $list .= '<tr>';
+                    $list .= '<td>';
+                    $list .= '<p class="text-info">';
+                    $list .= '<a href="list_ailments.php?ailment=' . $data['ailmentID'] . '" >';
+                    $list .= $data['ailment']. "&nbsp;";
+                    $list .= '</a></p>';
+                    $list .= '</td>';                    
+                    break;
+                case 2:
+                    $list .= '<td>';
+                    $list .= '<p class="text-info">';
+                    $list .= '<a href="list_ailments.php?ailment=' . $data['ailmentID'] . '" >';
+                    $list .= $data['ailment']. "&nbsp;";
+                    $list .= '</a></p>';
+                    $list .= '</td>';
+                    break;
+                case 3:
+                    $list .= '<td>';
+                    $list .= '<p class="text-info">';
+                    $list .= '<a href="list_ailments.php?ailment=' . $data['ailmentID'] . '" >';
+                    $list .= $data['ailment']. "&nbsp;";
+                    $list .= '</a></p>';
+                    $list .= '</td>';
+                    break;
+                case 4:
+                    $list .= '<td>';
+                    $list .= '<p class="text-info">';
+                    $list .= '<a href="list_ailments.php?ailment=' . $data['ailmentID'] . '" >';
+                    $list .= $data['ailment']. "&nbsp;";
+                    $list .= '</a></p>';
+                    $list .= '</td>';
+                    break;
+                case 5:
+                    $list .= '<td>';
+                    $list .= '<p class="text-info">';
+                    $list .= '<a href="list_ailments.php?ailment=' . $data['ailmentID'] . '" >';
+                    $list .= $data['ailment']. "&nbsp;";
+                    $list .= '</a></p>';
+                    $list .= '</td>';
+                    $list .= '</tr>';
+                    $count = 0;
+                    break;
+                
+            }
+            $count++;
+
   	}
-  }
+        
+        $list .= '</tbody>';
+        $list .= '</table>';
+    }
 	
 	
-	return $list;
+    return $list;
 	
-}//end listHerbs
+}//end listAilments
 
 function listailment($ailmentID)
 {
-	$herbs = new herbs;
-	$properties = new properties();
-	$energetics = new energetics();
-	$ailments = new ailments();
-	$ailmentList = $ailments->get_ailment($ailmentID);
-	
-	//echo "Ailment:" . $ailmentID . "<pre>";
- 	//print_r($ailmentList);
- 	//echo "</pre>";
-	
-  if (!is_null($ailmentList))
-	{
-			$ailmentInfo['index'] = $ailmentList[0][0];
-			$ailmentInfo['ailment'] = $ailmentList[0][1];
-			$ailmentInfo['description'] = $ailmentList[0][2];	
+    $herbs = new herbs;
+    $ailments = new ailments();
+    $ailmentList = $ailments->get_ailment($ailmentID);
+    $herbInfo = "";
+    $list="";    
 
+    //echo "Ailment:" . $ailmentID . "<pre>";
+    //print_r($ailmentList);
+    //echo "</pre>";
+    
 ?>
+
+<!-- The Modal -->
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" id="myModalTitle">
+      </div>
+      <div class="modal-body" id="myModalContent">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
 
 <script>
-var herb = {};
-var herbDef = {};
 
-<?PHP 
-
-		$herbList = $ailments->get_ailment_herbs($ailmentID);
-		if (!is_null($herbList))
-		{
-      	//echo "Properties:<pre>";
-       	//print_r($propertyList);
-       	//echo "</pre>";
-
-			foreach ($herbList as $herbCount => $herbData)
-			{
-			    //$propInfo .= $propData[0] . "(" . $propData[1] . ")";
-					
-			    $herbInfo .= '<a class="herbLink" herbid="' . $herbData[0] .'">' . $herbData[1] . '</a>';
-					
-					if ($herbCount < count($herbList)-1)
-					{
-					  $herbInfo .= ", ";
-					}
-
-			    echo 'herb["'. $herbData[0]. '"] = "'.$herbData[1].'";';
-			    echo 'herbDef["'. $herbData[0] . '"] = '. json_encode($herbData[2]).';';
-
-			}//end for herb loop
-
-			//echo $propInfo . "<br>";
-		}
-		$ailmentInfo['herbs'] = $herbInfo;
-			
-?>
-
-$(document).on("click", ".herbLink", function() {
-  var id = $(this).attr("herbid");
-	var defTitle = 'Definition: ' + herb[id];
-	$("#myModalTitle").html(defTitle);
-  $("#myModalContent").html(herbDef[id]);
-  $("#myModal").modal("show");
-});
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-       myModal.style.display = "none";
+function showHerbInfo(str)
+{
+    if (str == "") {
+        document.getElementById("txtHint").innerHTML = "NOT FOUND";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("myModalContent").innerHTML = this.responseText;
+                $("#myModalTitle").html("Herb Information:");
+                $("#myModal").modal("show");
+            }
+        };
+        xmlhttp.open("GET","jsPhpFunctions.php?which=getHerb&id="+str,true);
+        xmlhttp.send();
     }
-};
 
+
+}
 </script>
-<?PHP 
+<?PHP	
+
+	
+    if (!is_null($ailmentList))
+    {
+        $ailmentInfo['index'] = $ailmentList[0][0];
+        $ailmentInfo['ailment'] = $ailmentList[0][1];
+        $ailmentInfo['description'] = $ailmentList[0][2];
+
+        $herbList = $ailments->get_ailment_herbs($ailmentID);
+        
+        if (!is_null($herbList))
+        {
+
+            foreach ($herbList as $herbCount => $herbData)
+            {
+                //$propInfo .= $propData[0] . "(" . $propData[1] . ")";
+
+               //$herbInfo .= '<a class="herbLink" herbid="' . $herbData[0] .'">' . $herbData[1] . '</a>';
+                $herbInfo .= '<a class="herbLink"  onclick="showHerbInfo(' . $herbData[0] .')"  herbid="' . $herbData[0] .'">' . $herbData[1] . '</a>';
+
+                if ($herbCount < count($herbList)-1)
+                {
+                    $herbInfo .= ", ";
+                }
+
+            }//end for herb loop
+
+        }
+        $ailmentInfo['herbs'] = $herbInfo;
+
       	
-	}
+    }
 
-	$rowStyle == 'rowoff';
-
-	//echo "wierd<pre>";
-	//print_r($ailmentInfo);
-	//echo "</pre>";
-	
-  if (!is_null($ailmentInfo))
-  {
-
-	    $list .= '<table border="1" cellpadding="2" cellspacing="0" width="830px">';
-  		$list .= '<tr>';  		
-   		$list .= '<td align="left">';
-   		$list .= $ailmentInfo['ailment']. "&nbsp;";
-   		$list .= "</td>";
-   		$list .= "</tr>";
-
-  		$list .= '<tr >'; 
-  		$list .= '<td align="left" >';
-			$list .= $ailmentInfo['description']. "&nbsp;";
-  		$list .= "</td>";
-   		$list .= "</tr>";
-
-  		$list .= '<tr >'; 
-   		$list .= '<td align="left">';
-   		$list .= "Herbs: " . $ailmentInfo['herbs'] . "&nbsp;";
-   		$list .= "</td>";
-   		$list .= "</tr>";
-
-	    $list .= "</table>";
-			$list .= "<br/>";
+    $list = '<div class="container">';
+    	
+    if (!is_null($ailmentInfo))
+    {
+        $list .= '<table class="table">';
+        $list .= '<tbody>';
+        $list .= '<tr>';  		
+        $list .= '<td align="left" width="50%">';
+        $list .= $ailmentInfo['ailment']. "&nbsp;";
+        $list .= "</td>";
+        $list .= "</tr>";
+        $list .= '<tr >'; 
+        $list .= '<td align="left">';
+        $list .= "Herbs: " . $ailmentInfo['herbs'] . "&nbsp;";
+        $list .= "</td>";
+        $list .= "</tr>";
+        $list .= '</tbody>';
+        $list .= "</table>";
   	
-  }
-	
-	
-	return $list;
+    }
+
+    $list .= '</div>';
+    
+    return $list;
 	
 }
 

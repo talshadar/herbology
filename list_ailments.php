@@ -40,6 +40,7 @@ include ('inc/header.inc.php');
 
 <?PHP 
 
+$list = "";
 
 if (!$_GET && !$_POST)
 {
@@ -48,24 +49,16 @@ if (!$_GET && !$_POST)
 else
 {
   $ailmentID = $_GET['ailment'];
-	$list .= listAilment($ailmentID);
+  $list .= listAilment($ailmentID);
 }
 
 ?>
+<div class="container">
+    <?PHP echo $list; ?>
+</div>
 
-<table border="0" cellpadding="0" cellspacing="0" width = "80%">
-	<tr valign="middle">
-		<td align="left"><br>
-				<?PHP  echo $title; ?>
-		</td>
-	</tr>
-	<tr>
-	  <td> <?PHP  echo $list; ?> </td>
-	</tr>
-</table>
-
-<?PHP 
-
+<?PHP
+echo $list;
 
 # now include the footer
 include ('inc/footer.inc.php');
@@ -75,6 +68,7 @@ include ('inc/footer.inc.php');
 
 function listAilments()
 {
+    $list = "";
 	$herbs = new herbs;
 	$properties = new properties();
 	$energetics = new energetics();
@@ -105,7 +99,7 @@ function listAilments()
   	{
   		$rowStyle == 'rowon' ? $rowStyle = 'rowoff' : $rowStyle = 'rowon';
 	    $list .= '<p class="' . $rowStyle . '">';
-			$list .= '<a href="list_ailments.php?ailment=' . $data['ailmentID'] . '" target="_blank">';
+			$list .= '<a href="list_ailments.php?ailment=' . $data['ailmentID'] . '" >';
    		$list .= $data['ailment']. "&nbsp;";
 			$list .= '</a><br/>';
 			if ($data['description'] != "")

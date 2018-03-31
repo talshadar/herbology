@@ -35,20 +35,7 @@ else
     }
 }
 
-?>
-
-<table border="0" cellpadding="0" cellspacing="0" >
-	<tr valign="middle">
-		<td align="left"><br>
-				<?php echo $title; ?>
-		</td>
-	</tr>
-	<tr>
-	  <td> <?php echo $list; ?> </td>
-	</tr>
-</table>
-
-<?php
+ echo $list;
 
 
 # now include the footer
@@ -141,7 +128,7 @@ function listAllFormulas()
   	{
             $rowStyle == 'rowon' ? $rowStyle = 'rowoff' : $rowStyle = 'rowon';
 	    $list .= '<p class="' . $rowStyle . '">';
-            $list .= '<a href="list_formulas.php?formulaID=' . $data['formulaID'] . '" target="_blank">';
+            $list .= '<a href="list_formulas.php?formulaID=' . $data['formulaID'] . '" >';
             $list .= $data['name']. "&nbsp;";
             $list .= '</a><br/>';
             if ($data['description'] != "")

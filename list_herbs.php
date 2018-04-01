@@ -409,7 +409,7 @@ function showAilInfo(str)
         $list .= "<p>";
         
         $list .= "</td>";
-        $list .= '<td align="left" rowspan="3">';
+        $list .= '<td rowspan="3">';
 			
         /*
         get several images for each as well - new image table for file names
@@ -426,7 +426,7 @@ function showAilInfo(str)
             echo "</pre>";
             */
     
-            $carouselCode = '<div id="myCarousel" class="carousel slide" data-ride="carousel" >';
+            $carouselCode = '<div id="myCarousel" class="carousel slide" style="width: 400px; height: 400px; margin: 0 auto">';
             $carouselCode .= '<!-- Indicators -->';
             $carouselCode .= '<ol class="carousel-indicators">';
 

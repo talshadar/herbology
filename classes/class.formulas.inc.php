@@ -60,6 +60,11 @@ class formulas
         return $this->dO->get_preparations();		
     }
 
+    function get_preparation($prepId)
+    {
+        return $this->dO->get_preparation($prepId);		
+    }
+
     function get_herb_formulas($herbID)
     {
         //echo "first function";

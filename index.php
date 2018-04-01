@@ -39,7 +39,7 @@ include ('inc/header.inc.php');
   </div>
     <div class="col-md-6">
         <div class="thumbnail">
-            <img src="images/jenelle-ball-4395-unsplash.jpg" class="img-rounded img-responsive">
+            <img src="images/jenelle-ball-4395-unsplash_sized.jpg" class="img-rounded img-responsive">
         </div>
     </div>
 

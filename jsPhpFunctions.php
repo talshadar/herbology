@@ -17,6 +17,7 @@ include_once('classes/class.herbs.inc.php');
 include_once('classes/class.properties.inc.php');
 include_once('classes/class.energetics.inc.php');
 include_once('classes/class.ailments.inc.php');
+include_once('classes/class.formulas.inc.php');
 include_once('classes/class.parts.inc.php');
 include_once('classes/class.body.inc.php');
 
@@ -38,6 +39,10 @@ elseif ($which == "getAilment")
 elseif ($which == "getHerb")
 {
     echo getHerb($id);    
+}
+elseif ($which == "getPreparation")
+{
+    echo getFormulaPreparation($id);    
 }
 
 function  getProperty($propId)
@@ -113,6 +118,23 @@ function getHerb($herbId)
     $result .= '<p class="text-danger">Warning: ' . $herbInfo[0][5] . '</p>'; //warning
     $result .= '<p class="text-primary">Details: ' . $herbInfo[0][4] . '</p>'; //description
     //$result .= '<p class="text-secondary">Nutrional: ' . $herbInfo[0][6] . '</p>'; //nutrional
+    
+    //echo $result;
+    
+    return $result;
+}
+
+function  getFormulaPreparation($prepId)
+{
+    $formulas = new formulas;
+    $prepInfo = $formulas->get_preparation($prepId);
+    
+    //echo "id:" . $prepId;
+    //echo "<pre>";
+    //print_r($prepInfo);
+    //echo "</pre>";
+    
+    $result = $prepInfo[0][1] . ": " . $prepInfo[0][2];
     
     //echo $result;
     

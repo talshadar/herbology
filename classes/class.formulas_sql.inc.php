@@ -75,7 +75,7 @@ preparations
 
     function get_formula_preparations($formulaID)
     {
-        $sql = "select preparations.type, preparations.description from preparations, formula_preparations ";
+        $sql = "select preparations.preparation_index, preparations.type, preparations.description from preparations, formula_preparations ";
         $sql .= "where preparations.preparation_index = formula_preparations.preparation_index and formula_preparations.formula_index = " . $formulaID;
         //echo "<br>SQL:" . $sql;
 
@@ -120,6 +120,15 @@ preparations
         return $result;		
     }
 
+    function get_preparation($prepId)
+    {
+        $sql = "select * from preparations where preparation_index = " . $prepId;
+        //echo "<br>SQL:" . $sql;
+
+        $result = $this->db->fetch_from_db($sql);
+        return $result;		
+    }
+    
     function get_herb_formulas($herbID)
     {
 

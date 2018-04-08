@@ -20,7 +20,7 @@ include('inc/header.inc.php');
 </div>
 
 <div class="row">
-    <div class="col-md-2"></br>
+    <div class="col-md-1">
       <div>
           <p>
               <a href="https://unsplash.com/search/photos/lisa-hobbs" target="_NEW">Lisa Hobbs</a> - Header image.
@@ -34,22 +34,23 @@ include('inc/header.inc.php');
             </a>
         </div>
     </div>
-    <div class="col-md-2"></br>
+    <div class="col-md-1">
       <div>
           <p>
               <a href="https://unsplash.com/search/photos/jenelle-ball" target="_NEW">Jenelle Ball</a> - Main page.
           </p>
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-1">
         <div  style="width:150px;">
             <a href="images/jenelle-ball-4395-unsplash.jpg" target="_NEW">
                 <img src="images/jenelle-ball-4395-unsplash.jpg" class="img-rounded img-thumbnail">
             </a>
         </div>
     </div>
-
-    <div class="col-md-2"></br>
+</div>
+<div class="row">
+    <div class="col-md-1"></br>
         <div>
             <p>
                 <a href="https://unsplash.com/search/photos/katherine-hanlon" target="_NEW">Katherine Hanlon</a> - About page.
@@ -63,9 +64,7 @@ include('inc/header.inc.php');
             </a>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-2">
+    <div class="col-md-1">
         <div>
             <p>
                 <a href="https://unsplash.com/search/photos/rickykharawala" target="_NEW">Ricky Kharawala</a> - Blog page header.

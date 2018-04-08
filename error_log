@@ -463,3 +463,13 @@
 [19-Nov-2017 11:47:24 America/Chicago] PHP Fatal error:  Call to undefined method energetics::get_ailments() in /home2/bruttle/public_html/bryandevelopment.ca/herbology/admin_herbs.php on line 301
 [19-Nov-2017 11:48:16 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/bruttle/public_html/bryandevelopment.ca/herbology/admin_herbs.php on line 549
 [25-Nov-2017 17:51:02 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/bruttle/public_html/bryandevelopment.ca/herbology/classes/class.formulas_sql.inc.php on line 173
+[07-Apr-2018 08:43:58 America/Chicago] PHP Notice:  Undefined index: access in /home3/tammat/public_html/herbology/admin.php on line 15
+[07-Apr-2018 08:43:58 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home3/tammat/public_html/herbology/admin.php:15) in /home3/tammat/public_html/herbology/admin.php on line 17
+[07-Apr-2018 08:44:23 America/Chicago] PHP Notice:  Undefined index: access in /home3/tammat/public_html/herbology/admin.php on line 15
+[07-Apr-2018 08:44:23 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home3/tammat/public_html/herbology/admin.php:15) in /home3/tammat/public_html/herbology/admin.php on line 17
+[07-Apr-2018 08:47:40 America/Chicago] PHP Notice:  Undefined index: access in /home3/tammat/public_html/herbology/admin.php on line 15
+[07-Apr-2018 08:47:40 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home3/tammat/public_html/herbology/admin.php:14) in /home3/tammat/public_html/herbology/admin.php on line 17
+[07-Apr-2018 08:47:42 America/Chicago] PHP Notice:  Undefined index: access in /home3/tammat/public_html/herbology/admin.php on line 15
+[07-Apr-2018 08:47:42 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home3/tammat/public_html/herbology/admin.php:14) in /home3/tammat/public_html/herbology/admin.php on line 17
+[07-Apr-2018 08:49:46 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home3/tammat/public_html/herbology/admin.php:14) in /home3/tammat/public_html/herbology/admin.php on line 26
+[07-Apr-2018 08:49:49 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home3/tammat/public_html/herbology/admin.php:14) in /home3/tammat/public_html/herbology/admin.php on line 26

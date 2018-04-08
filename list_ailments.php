@@ -68,27 +68,26 @@ include ('inc/footer.inc.php');
 function listAilments()
 {
     $list = "";
-	$herbs = new herbs;
-	$properties = new properties();
-	$energetics = new energetics();
-	$ailments = new ailments();
-	$ailmentList = $ailments->get_ailments();
+    $herbs = new herbs;
+    $properties = new properties();
+    $energetics = new energetics();
+    $ailments = new ailments();
+    $ailmentList = $ailments->get_ailments();
 	
   if (!is_null($ailmentList))
     {
   	foreach ($ailmentList as $count => $data)
   	{
-  			$ailmentInfo[$count]['ailmentID'] = $data[0];
-  			$ailmentInfo[$count]['ailment'] = $data[1];
-  			$ailmentInfo[$count]['description'] = $data[2];
-
+            $ailmentInfo[$count]['ailmentID'] = $data[0];
+            $ailmentInfo[$count]['ailment'] = $data[1];
+            $ailmentInfo[$count]['description'] = $data[2];
   	}	
     }
 
-  
     //echo "<pre>";
     //print_r($ailmentInfo);
     //echo "</pre>";
+    
     $list = '<table class="table table-striped">';
     $list .= '<tbody>';
     //now start looping through the ailments
@@ -210,9 +209,8 @@ function showHerbInfo(str)
         xmlhttp.open("GET","jsPhpFunctions.php?which=getHerb&id="+str,true);
         xmlhttp.send();
     }
-
-
 }
+
 </script>
 <?PHP	
 

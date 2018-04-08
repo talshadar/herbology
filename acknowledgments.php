@@ -23,7 +23,7 @@ include('inc/header.inc.php');
     <div class="col-md-2"></br>
       <div>
           <p>
-              <a href="https://unsplash.com/search/photos/lisa-hobbs" target="_NEW">Lisa Hobbs<a> - Header image.
+              <a href="https://unsplash.com/search/photos/lisa-hobbs" target="_NEW">Lisa Hobbs</a> - Header image.
           </p>
       </div>
     </div>
@@ -37,7 +37,7 @@ include('inc/header.inc.php');
     <div class="col-md-2"></br>
       <div>
           <p>
-              <a href="https://unsplash.com/search/photos/jenelle-ball" target="_NEW">Jenelle Ball<a> - Main page.
+              <a href="https://unsplash.com/search/photos/jenelle-ball" target="_NEW">Jenelle Ball</a> - Main page.
           </p>
       </div>
     </div>
